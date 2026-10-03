@@ -44,7 +44,7 @@ All formal documentation for this project lives in [`docs/`](./docs):
 
 ```bash
 # clone
-git clone <repo-url>
+git clone https://github.com/Fickleimagination/SE-PROJECT---STUDENT-MANAGEMENT-SYSTEM.git
 cd srms
 
 # build (once source is added)
