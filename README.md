@@ -7,7 +7,7 @@ the Software Engineering (UE24CS341A) Jackfruit Mini-Project at PES University.
 
 ## Team
 
-| Member | USN | Module Owned |
+| Member | SRN | Module Owned |
 |---|---|---|
 | B Varun | PES1UG24CS109 | Administrator Authentication & Session Management |
 | Bhavyaa Garg | PES1UG24CS116 | Student Record CRUD |
