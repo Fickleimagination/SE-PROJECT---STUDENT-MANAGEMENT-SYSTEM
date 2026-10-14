@@ -1,8 +1,7 @@
-// TEMPORARY stub of the shared types from SAD Section 4.3.1.
-// Owner: Bhavyaa Garg. Replace this file with the team's version when merged;
-// keep the names and field order identical so report_service compiles unchanged.
+// Shared types (SAD 4.3.1). Owner: Bhavyaa Garg.
 #pragma once
 #include <ctime>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -28,6 +27,14 @@ struct Student {
     double cgpa;
     std::string created_at;
     std::string updated_at;
+};
+
+struct StudentPatch {
+    std::optional<std::string> name;
+    std::optional<std::string> department;
+    std::optional<std::string> contact;
+    std::optional<int> semester;
+    std::optional<double> cgpa;
 };
 
 template <typename T>
