@@ -1,5 +1,14 @@
 #include "console_ui.h"
 
+#include <iostream>
+
+#ifdef _WIN32
+#include <conio.h>
+#else
+#include <termios.h>
+#include <unistd.h>
+#endif
+
 #include <ctime>
 #include <iostream>
 #include <string>
@@ -11,7 +20,68 @@ ConsoleUI::ConsoleUI(
     std::istream& input,
     std::ostream& output)
     : auth_(auth), input_(input), output_(output) {}
+bool ConsoleUI::promptPassword(
+    const std::string& message,
+    std::string& value) {
 
+    output_ << message;
+    output_.flush();
+    value.clear();
+
+#ifdef _WIN32
+    if (&input_ != &std::cin) {
+        return static_cast<bool>(std::getline(input_, value));
+    }
+
+    while (true) {
+        int ch = _getch();
+
+        if (ch == '\r' || ch == '\n') {
+            output_ << '\n';
+            return true;
+        }
+
+        if (ch == '\b') {
+            if (!value.empty()) {
+                value.pop_back();
+            }
+            continue;
+        }
+
+        if (ch == 0 || ch == 224) {
+            (void)_getch();
+            continue;
+        }
+
+        value.push_back(static_cast<char>(ch));
+    }
+
+#else
+    if (&input_ != &std::cin) {
+        return static_cast<bool>(std::getline(input_, value));
+    }
+
+    termios oldSettings{};
+
+    if (tcgetattr(STDIN_FILENO, &oldSettings) != 0) {
+        return static_cast<bool>(std::getline(input_, value));
+    }
+
+    termios newSettings = oldSettings;
+    newSettings.c_lflag &= static_cast<tcflag_t>(~ECHO);
+
+    if (tcsetattr(STDIN_FILENO, TCSANOW, &newSettings) != 0) {
+        return static_cast<bool>(std::getline(input_, value));
+    }
+
+    bool readOk = static_cast<bool>(std::getline(input_, value));
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldSettings);
+    output_ << '\n';
+
+    return readOk;
+#endif
+}
 bool ConsoleUI::promptLine(
     const std::string& message,
     std::string& value) {
@@ -30,7 +100,7 @@ bool ConsoleUI::login(Session& session) {
         return false;
     }
 
-    if (!promptLine("Password: ", password)) {
+    if (!promptPassword("Password: ", password)) {
         return false;
     }
 
@@ -65,8 +135,8 @@ bool ConsoleUI::requirePasswordChange(Session& session) {
         std::string password;
         std::string confirmation;
 
-        if (!promptLine("New password: ", password) ||
-            !promptLine("Confirm new password: ", confirmation)) {
+        if (!promptPassword("New password: ", password) ||
+            !promptPassword("Confirm new password: ", confirmation)) {
             return false;
         }
 

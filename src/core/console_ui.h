@@ -25,6 +25,8 @@ private:
         const std::string& message,
         std::string& value);
 
+        bool promptPassword(const std::string& message, std::string& value);
+
     bool login(Session& session);
 
     bool requirePasswordChange(Session& session);
