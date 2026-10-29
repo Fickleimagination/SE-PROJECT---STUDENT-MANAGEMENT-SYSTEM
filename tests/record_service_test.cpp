@@ -135,7 +135,11 @@ TEST_F(RecordServiceAddTest, IdleSessionIsDenied) {
     Session stale{"admin", true, kNow - 601};  // idle for more than 10 minutes (REQ-AUTH-08)
     EXPECT_EQ(service.addStudent(stale, goodStudent()), Status::ACCESS_DENIED);
     Session justInTime{"admin", true, kNow - 600};
-    EXPECT_EQ(service.addStudent(justInTime, goodStudent()), Status::OK);
+        EXPECT_EQ(service.addStudent(justInTime, goodStudent()), Status::OK);
+        Session future{"admin", true, kNow + 1};
+    EXPECT_EQ(service.addStudent(future, goodStudent()),
+              Status::ACCESS_DENIED);
+
 }
 
 // TC-DATA-02: every Appendix B rule is re-checked inside the service.
