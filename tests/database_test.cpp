@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 
 #include <cstdio>
+#include <filesystem>
 #include <fstream>
 #include <string>
 
@@ -15,6 +16,7 @@ constexpr const char* kBadSchemaPath =
     "build/database_bad_schema_test.sql";
 
 void cleanupFiles() {
+    std::filesystem::create_directories("build");
     std::remove(kDbPath);
     std::remove("build/database_error_test.db-wal");
     std::remove("build/database_error_test.db-shm");

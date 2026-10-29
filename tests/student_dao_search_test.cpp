@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 
 #include <cstdio>
+#include <filesystem>
 #include <memory>
 #include <string>
 #include <vector>
@@ -20,6 +21,7 @@ protected:
     std::unique_ptr<StudentDAO> dao_;
 
     void removeDatabaseFiles() {
+        std::filesystem::create_directories("build");
         std::remove(kDbPath);
         std::remove("build/student_dao_search_test.db-wal");
         std::remove("build/student_dao_search_test.db-shm");

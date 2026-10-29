@@ -4,6 +4,7 @@
 #include <gtest/gtest.h>
 
 #include <cstdio>
+#include <filesystem>
 #include <memory>
 #include <string>
 
@@ -13,6 +14,7 @@ constexpr const char* kDbPath = "build/student_dao_test.db";
 constexpr const char* kSchemaPath = "sql/schema.sql";
 
 void removeTestDatabase() {
+    std::filesystem::create_directories("build");
     std::remove(kDbPath);
     std::remove("build/student_dao_test.db-wal");
     std::remove("build/student_dao_test.db-shm");
