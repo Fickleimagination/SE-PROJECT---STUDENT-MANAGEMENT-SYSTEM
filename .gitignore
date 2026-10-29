@@ -1,2 +1,4 @@
 
 report_tests
+build/
+.vscode/
