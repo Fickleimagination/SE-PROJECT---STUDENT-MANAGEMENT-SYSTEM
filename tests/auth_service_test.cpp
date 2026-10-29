@@ -3,6 +3,7 @@
 #include <array>
 #include <ctime>
 #include <optional>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <utility>
@@ -10,7 +11,7 @@
 #include <openssl/evp.h>
 
 #include "../src/core/auth_service.h"
-
+#include "../src/core/console_ui.h"
 using namespace srms;
 
 namespace {
@@ -227,4 +228,27 @@ TEST(AuthServiceTest, LogoutAndIdleTimeoutEndAdminAccess) {
     EXPECT_FALSE(session.is_admin);
     EXPECT_TRUE(session.username.empty());
     EXPECT_FALSE(service.isActiveAdmin(session));
+}
+
+TEST(ConsoleUITest, DoesNotPrintPasswordToOutput) {
+    FakeAdminRepository repo;
+    repo.account = makeAccount();
+
+    std::time_t now = 1700000000;
+    AuthService service(repo, nullptr, [&now] { return now; });
+
+    std::istringstream input(
+        "admin\nCorrectPass123\n3\n");
+    std::ostringstream output;
+
+    ConsoleUI ui(service, input, output);
+    ui.run();
+
+    EXPECT_NE(
+        output.str().find("Login successful."),
+        std::string::npos);
+
+    EXPECT_EQ(
+        output.str().find("CorrectPass123"),
+        std::string::npos);
 }
