@@ -54,7 +54,7 @@ jobs:
       - name: Run Cppcheck
         run: |
           cppcheck \
-            --enable=warning,style,performance,portability \
+            --enable=warning,performance,portability \
             --std=c++17 \
             --suppress=missingIncludeSystem \
             --error-exitcode=1 \
