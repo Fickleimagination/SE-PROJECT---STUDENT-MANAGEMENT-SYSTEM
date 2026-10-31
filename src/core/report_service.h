@@ -42,7 +42,10 @@ struct Report {
 class StudentSource {
 public:
     virtual ~StudentSource() = default;
-    virtual std::vector<Student> findByDeptSem(const std::string& department, int semester) = 0;
+    virtual Result<std::vector<Student>> findByDeptSem(
+    const std::string& department,
+    int semester
+    ) = 0;
 };
 
 // Called after a successful export so the audit_log records REPORT_EXPORTED (SEC-04).

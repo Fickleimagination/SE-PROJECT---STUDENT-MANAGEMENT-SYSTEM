@@ -1,0 +1,62 @@
+name: SRMS CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    name: Build, test, coverage, and static analysis
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            cmake \
+            ninja-build \
+            g++ \
+            libsqlite3-dev \
+            libgtest-dev \
+            cppcheck \
+            gcovr
+
+      - name: Configure coverage build
+        run: >
+          cmake -S . -B build-ci -G Ninja
+          -DCMAKE_BUILD_TYPE=Debug
+          "-DCMAKE_CXX_FLAGS=--coverage -O0 -g"
+          "-DCMAKE_EXE_LINKER_FLAGS=--coverage"
+
+      - name: Build
+        run: cmake --build build-ci --parallel 2
+
+      - name: Run all tests
+        run: ctest --test-dir build-ci --output-on-failure
+
+      - name: Check line coverage
+        run: >
+          gcovr --root .
+          --filter 'src/core/'
+          --exclude 'tests/'
+          --print-summary
+          --fail-under-line 70
+          build-ci
+
+      - name: Run Cppcheck
+        run: |
+          cppcheck \
+            --enable=warning,performance,portability \
+            --std=c++17 \
+            --suppress=missingIncludeSystem \
+            --error-exitcode=1 \
+            -I src/core \
+            src/core
