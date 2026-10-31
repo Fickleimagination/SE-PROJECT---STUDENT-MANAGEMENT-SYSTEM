@@ -44,7 +44,9 @@ std::string csvEscape(const std::string& field) {
 }
 
 bool sessionAllowed(const Session& session, std::time_t now) {
-    return session.is_admin && (now - session.last_activity) <= kIdleLimitSeconds;
+    if (!session.is_admin) return false;
+    if (session.last_activity > now) return false;  // future timestamp: reject
+    return (now - session.last_activity) <= kIdleLimitSeconds;
 }
 
 }  // namespace
