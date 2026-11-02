@@ -1,0 +1,21 @@
+# System Validation Report: Reports module
+
+Run on branch main, 13 tests, all passing (unit_test_report.txt).
+FutureSessionTimestampIsDenied is in PR #29, which is not merged, so it is not in this run.
+
+| Test | Requirement | Result |
+|---|---|---|
+| NonAdminIsDenied | REQ-AUTH-06, SEC-07 | Pass |
+| IdleSessionIsDenied | REQ-AUTH-08 | Pass |
+| InvalidDepartmentIsRejected | REQ-DATA-05 | Pass |
+| SemesterOutOfRangeIsRejected | REQ-DATA-04 | Pass |
+| ClassListOrderedByRollNumber | REQ-RPT-01 | Pass |
+| AverageRoundedToTwoDecimals | REQ-RPT-02, TC-07 | Pass |
+| EmptySelectionShowsMessage | REQ-RPT-05 | Pass |
+| TopperListIncludesAllTies | REQ-RPT-03, TC-08 | Pass |
+| ExportWritesCsvAndAudits | REQ-RPT-04, SEC-04 | Pass |
+| ExportWritesTabSeparatedTxt | REQ-RPT-04 | Pass |
+| EmptyReportCreatesNoFile | REQ-RPT-05 | Pass |
+| ExportDeniedWithoutSession | REQ-AUTH-06 | Pass |
+| CsvQuotesFieldsWithCommas | REQ-RPT-04 | Pass |
+| FutureSessionTimestampIsDenied | REQ-AUTH-06 | Not run on main (PR #29 pending) |
