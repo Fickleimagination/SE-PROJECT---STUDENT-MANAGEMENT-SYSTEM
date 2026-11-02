@@ -322,6 +322,12 @@ TEST_F(ReportServiceTest, ExportDeniedWithoutSession) {
     EXPECT_EQ(exported.status, Status::ACCESS_DENIED);
 }
 
+TEST_F(ReportServiceTest, FutureSessionTimestampIsDenied) {
+    Session future{"admin", true, kNow + 3600};
+    auto r = service.generate(future, ReportType::ClassList, {"CSE", 5}, kNow);
+    EXPECT_EQ(r.status, Status::ACCESS_DENIED);
+}
+
 TEST_F(ReportServiceTest, CsvQuotesFieldsWithCommas) {
     source.rows = {
         Student{
