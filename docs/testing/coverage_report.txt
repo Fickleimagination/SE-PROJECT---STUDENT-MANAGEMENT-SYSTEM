@@ -1,0 +1,437 @@
+File 'src/core/report_service.cpp'
+Lines executed:90.27% of 113
+Branches executed:78.91% of 256
+Taken at least once:47.66% of 256
+No calls
+Creating 'report_service.cpp.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string'
+Lines executed:73.78% of 267
+Branches executed:80.00% of 70
+Taken at least once:55.71% of 70
+No calls
+Creating 'string.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__vector/vector.h'
+Lines executed:96.20% of 158
+Branches executed:100.00% of 146
+Taken at least once:54.79% of 146
+No calls
+Creating 'vector.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h'
+Lines executed:69.57% of 23
+Branches executed:100.00% of 10
+Taken at least once:50.00% of 10
+No calls
+Creating 'function.h.gcov'
+
+File 'src/core/report_service.h'
+Lines executed:100.00% of 8
+Branches executed:100.00% of 2
+Taken at least once:50.00% of 2
+No calls
+Creating 'report_service.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/wrap_iter.h'
+Lines executed:100.00% of 19
+No branches
+No calls
+Creating 'wrap_iter.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find.h'
+Lines executed:100.00% of 8
+Branches executed:100.00% of 4
+Taken at least once:100.00% of 4
+No calls
+Creating 'find.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/sort.h'
+Lines executed:12.04% of 382
+Branches executed:9.22% of 217
+Taken at least once:5.07% of 217
+No calls
+Creating 'sort.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/max.h'
+Lines executed:100.00% of 4
+Branches executed:100.00% of 4
+Taken at least once:100.00% of 4
+No calls
+Creating 'max.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path.h'
+Lines executed:94.12% of 34
+Branches executed:100.00% of 10
+Taken at least once:60.00% of 10
+No calls
+Creating 'path.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__system_error/error_code.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'error_code.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/operations.h'
+Lines executed:100.00% of 3
+No branches
+No calls
+Creating 'operations.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/pair.h'
+Lines executed:100.00% of 13
+Branches executed:100.00% of 2
+Taken at least once:50.00% of 2
+No calls
+Creating 'pair.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/fstream'
+Lines executed:81.82% of 11
+Branches executed:85.71% of 14
+Taken at least once:42.86% of 14
+No calls
+Creating 'fstream.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ios'
+Lines executed:91.67% of 36
+Branches executed:100.00% of 6
+Taken at least once:66.67% of 6
+No calls
+Creating 'ios.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator_traits.h'
+Lines executed:86.67% of 15
+No branches
+No calls
+Creating 'allocator_traits.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/pointer_traits.h'
+Lines executed:100.00% of 8
+No branches
+No calls
+Creating 'pointer_traits.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator.h'
+Lines executed:93.33% of 15
+Branches executed:100.00% of 8
+Taken at least once:37.50% of 8
+No calls
+Creating 'allocator.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__debug_utils/sanitizers.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'sanitizers.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/allocate.h'
+Lines executed:80.00% of 15
+Branches executed:100.00% of 18
+Taken at least once:38.89% of 18
+No calls
+Creating 'allocate.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/exception_guard.h'
+Lines executed:88.89% of 9
+Branches executed:54.55% of 22
+Taken at least once:27.27% of 22
+No calls
+Creating 'exception_guard.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocate_at_least.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'allocate_at_least.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/min.h'
+Lines executed:100.00% of 4
+Branches executed:100.00% of 2
+Taken at least once:50.00% of 2
+No calls
+Creating 'min.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/limits'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'limits.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/comp.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'comp.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdexcept'
+Lines executed:0.00% of 4
+Branches executed:0.00% of 2
+Taken at least once:0.00% of 2
+No calls
+Creating 'stdexcept.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/exceptions.h'
+Lines executed:0.00% of 2
+No branches
+No calls
+Creating 'exceptions.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/uninitialized_algorithms.h'
+Lines executed:91.67% of 36
+Branches executed:100.00% of 26
+Taken at least once:61.54% of 26
+No calls
+Creating 'uninitialized_algorithms.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/unwrap_range.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'unwrap_range.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/unwrap_iter.h'
+Lines executed:100.00% of 8
+Branches executed:100.00% of 8
+Taken at least once:50.00% of 8
+No calls
+Creating 'unwrap_iter.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/destroy.h'
+Lines executed:100.00% of 4
+Branches executed:100.00% of 8
+Taken at least once:25.00% of 8
+No calls
+Creating 'destroy.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/reverse_iterator.h'
+Lines executed:0.00% of 10
+No branches
+No calls
+Creating 'reverse_iterator.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string_view'
+Lines executed:100.00% of 11
+No branches
+No calls
+Creating 'string_view.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ostream/basic_ostream.h'
+Lines executed:100.00% of 8
+No branches
+No calls
+Creating 'basic_ostream.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ostream/put_character_sequence.h'
+Lines executed:77.78% of 18
+Branches executed:75.00% of 24
+Taken at least once:37.50% of 24
+No calls
+Creating 'put_character_sequence.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__locale_dir/pad_and_output.h'
+Lines executed:55.17% of 29
+Branches executed:57.14% of 21
+Taken at least once:28.57% of 21
+No calls
+Creating 'pad_and_output.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/ostreambuf_iterator.h'
+Lines executed:100.00% of 2
+Branches executed:100.00% of 2
+Taken at least once:50.00% of 2
+No calls
+Creating 'ostreambuf_iterator.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/streambuf'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'streambuf.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__string/char_traits.h'
+Lines executed:95.24% of 21
+Branches executed:100.00% of 10
+Taken at least once:60.00% of 10
+No calls
+Creating 'char_traits.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__locale'
+Lines executed:100.00% of 3
+No branches
+No calls
+Creating '__locale.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find_first_of.h'
+Lines executed:100.00% of 7
+Branches executed:100.00% of 6
+Taken at least once:100.00% of 6
+No calls
+Creating 'find_first_of.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__string/constexpr_c_functions.h'
+Lines executed:100.00% of 8
+Branches executed:100.00% of 2
+Taken at least once:50.00% of 2
+No calls
+Creating 'constexpr_c_functions.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/initializer_list'
+Lines executed:100.00% of 3
+No branches
+No calls
+Creating 'initializer_list.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/invoke.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'invoke.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/identity.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'identity.h.gcov'
+
+File 'src/core/types.h'
+Lines executed:nan% of 0
+No branches
+No calls
+Creating 'types.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__debug_utils/randomize_range.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'randomize_range.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__debug_utils/strict_weak_ordering_check.h'
+Lines executed:100.00% of 3
+No branches
+No calls
+Creating 'strict_weak_ordering_check.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/bit_log2.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'bit_log2.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/make_unsigned.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'make_unsigned.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/countl.h'
+Lines executed:100.00% of 2
+No branches
+No calls
+Creating 'countl.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/iterator_operations.h'
+Lines executed:30.00% of 10
+No branches
+No calls
+Creating 'iterator_operations.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partial_sort.h'
+Lines executed:0.00% of 24
+Branches executed:0.00% of 8
+Taken at least once:0.00% of 8
+No calls
+Creating 'partial_sort.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/iter_swap.h'
+Lines executed:100.00% of 3
+No branches
+No calls
+Creating 'iter_swap.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/swap.h'
+Lines executed:100.00% of 5
+No branches
+No calls
+Creating 'swap.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/make_heap.h'
+Lines executed:0.00% of 9
+Branches executed:0.00% of 4
+Taken at least once:0.00% of 4
+No calls
+Creating 'make_heap.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/sift_down.h'
+Lines executed:0.00% of 42
+Branches executed:0.00% of 26
+Taken at least once:0.00% of 26
+No calls
+Creating 'sift_down.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/sort_heap.h'
+Lines executed:0.00% of 7
+Branches executed:0.00% of 2
+Taken at least once:0.00% of 2
+No calls
+Creating 'sort_heap.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pop_heap.h'
+Lines executed:0.00% of 15
+Branches executed:0.00% of 10
+Taken at least once:0.00% of 10
+No calls
+Creating 'pop_heap.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/push_heap.h'
+Lines executed:0.00% of 18
+Branches executed:0.00% of 10
+Taken at least once:0.00% of 10
+No calls
+Creating 'push_heap.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/countr.h'
+Lines executed:0.00% of 2
+No branches
+No calls
+Creating 'countr.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/blsr.h'
+Lines executed:0.00% of 2
+No branches
+No calls
+Creating 'blsr.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__split_buffer'
+Lines executed:88.46% of 26
+Branches executed:80.00% of 20
+Taken at least once:50.00% of 20
+No calls
+Creating '__split_buffer.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/distance.h'
+Lines executed:100.00% of 4
+No branches
+No calls
+Creating 'distance.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/is_pointer_in_range.h'
+Lines executed:100.00% of 2
+Branches executed:100.00% of 2
+Taken at least once:100.00% of 2
+No calls
+Creating 'is_pointer_in_range.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/scope_guard.h'
+Lines executed:100.00% of 4
+Branches executed:100.00% of 2
+Taken at least once:50.00% of 2
+No calls
+Creating 'scope_guard.h.gcov'
+
+File '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__exception/exception.h'
+Lines executed:0.00% of 1
+No branches
+No calls
+Creating 'exception.h.gcov'
+

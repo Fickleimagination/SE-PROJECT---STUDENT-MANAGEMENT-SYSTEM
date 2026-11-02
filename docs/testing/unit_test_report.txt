@@ -1,0 +1,35 @@
+Running main() from /private/tmp/googletest-20260810-2300-tbptpn/googletest-1.18.0/googletest/src/gtest_main.cc
+[==========] Running 13 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 13 tests from ReportServiceTest
+[ RUN      ] ReportServiceTest.NonAdminIsDenied
+[       OK ] ReportServiceTest.NonAdminIsDenied (0 ms)
+[ RUN      ] ReportServiceTest.IdleSessionIsDenied
+[       OK ] ReportServiceTest.IdleSessionIsDenied (0 ms)
+[ RUN      ] ReportServiceTest.InvalidDepartmentIsRejected
+[       OK ] ReportServiceTest.InvalidDepartmentIsRejected (0 ms)
+[ RUN      ] ReportServiceTest.SemesterOutOfRangeIsRejected
+[       OK ] ReportServiceTest.SemesterOutOfRangeIsRejected (0 ms)
+[ RUN      ] ReportServiceTest.ClassListOrderedByRollNumber
+[       OK ] ReportServiceTest.ClassListOrderedByRollNumber (0 ms)
+[ RUN      ] ReportServiceTest.AverageRoundedToTwoDecimals
+[       OK ] ReportServiceTest.AverageRoundedToTwoDecimals (0 ms)
+[ RUN      ] ReportServiceTest.EmptySelectionShowsMessage
+[       OK ] ReportServiceTest.EmptySelectionShowsMessage (0 ms)
+[ RUN      ] ReportServiceTest.TopperListIncludesAllTies
+[       OK ] ReportServiceTest.TopperListIncludesAllTies (0 ms)
+[ RUN      ] ReportServiceTest.ExportWritesCsvAndAudits
+[       OK ] ReportServiceTest.ExportWritesCsvAndAudits (1 ms)
+[ RUN      ] ReportServiceTest.ExportWritesTabSeparatedTxt
+[       OK ] ReportServiceTest.ExportWritesTabSeparatedTxt (0 ms)
+[ RUN      ] ReportServiceTest.EmptyReportCreatesNoFile
+[       OK ] ReportServiceTest.EmptyReportCreatesNoFile (0 ms)
+[ RUN      ] ReportServiceTest.ExportDeniedWithoutSession
+[       OK ] ReportServiceTest.ExportDeniedWithoutSession (0 ms)
+[ RUN      ] ReportServiceTest.CsvQuotesFieldsWithCommas
+[       OK ] ReportServiceTest.CsvQuotesFieldsWithCommas (0 ms)
+[----------] 13 tests from ReportServiceTest (2 ms total)
+
+[----------] Global test environment tear-down
+[==========] 13 tests from 1 test suite ran. (2 ms total)
+[  PASSED  ] 13 tests.
