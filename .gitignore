@@ -1,4 +1,18 @@
+﻿report_tests
 
-report_tests
+
 build/
 .vscode/
+# CMake build output
+/build/
+/build-coverage/
+/cmake-build-*/
+
+# Local SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Local editor settings
+/.vscode/
+/build-ci/
