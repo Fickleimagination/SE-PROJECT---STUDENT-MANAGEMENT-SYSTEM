@@ -2,6 +2,7 @@
 
 #include <sqlite3.h>
 
+#include <limits>
 #include <string>
 #include <utility>
 #include <vector>
@@ -48,6 +49,21 @@ int bindText(
     );
 }
 
+Student readStudent(sqlite3_stmt* statement) {
+    Student student{};
+
+    student.roll_no = columnText(statement, 0);
+    student.name = columnText(statement, 1);
+    student.department = columnText(statement, 2);
+    student.semester = sqlite3_column_int(statement, 3);
+    student.contact = columnText(statement, 4);
+    student.cgpa = sqlite3_column_double(statement, 5);
+    student.created_at = columnText(statement, 6);
+    student.updated_at = columnText(statement, 7);
+
+    return student;
+}
+
 // Escape SQL LIKE wildcard characters so that user input is
 // searched literally. The backslash is the LIKE escape character.
 std::string escapeLike(const std::string& value) {
@@ -66,6 +82,382 @@ std::string escapeLike(const std::string& value) {
 }
 
 }  // namespace
+
+Result<Student> StudentDAO::find(
+    const std::string& roll_no
+) {
+    sqlite3* db = database_.handle();
+
+    if (db == nullptr) {
+        return {
+            Status::DB_ERROR,
+            {},
+            "database is not open"
+        };
+    }
+
+    const char* sql =
+        "SELECT roll_no, name, department, semester, "
+        "contact, cgpa, created_at, updated_at "
+        "FROM students "
+        "WHERE roll_no = ?1 COLLATE NOCASE "
+        "LIMIT 1;";
+
+    sqlite3_stmt* statement = nullptr;
+
+    int rc = sqlite3_prepare_v2(
+        db, sql, -1, &statement, nullptr
+    );
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        return {
+            Status::DB_ERROR,
+            {},
+            "database query failed"
+        };
+    }
+
+    rc = bindText(statement, 1, roll_no);
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        return {
+            Status::DB_ERROR,
+            {},
+            "database query failed"
+        };
+    }
+
+    rc = sqlite3_step(statement);
+
+    if (rc == SQLITE_ROW) {
+        Student student = readStudent(statement);
+        const int finalize_rc = sqlite3_finalize(statement);
+
+        if (finalize_rc != SQLITE_OK) {
+            return {
+                Status::DB_ERROR,
+                {},
+                "database query failed"
+            };
+        }
+
+        return {
+            Status::OK,
+            std::move(student),
+            ""
+        };
+    }
+
+    const int finalize_rc = sqlite3_finalize(statement);
+
+    if (rc == SQLITE_DONE && finalize_rc == SQLITE_OK) {
+        return {
+            Status::NOT_FOUND,
+            {},
+            "student not found"
+        };
+    }
+
+    return {
+        Status::DB_ERROR,
+        {},
+        "database query failed"
+    };
+}
+
+Status StudentDAO::update(const Student& student) {
+    sqlite3* db = database_.handle();
+
+    if (db == nullptr) {
+        return Status::DB_ERROR;
+    }
+
+    if (!execute(db, "BEGIN IMMEDIATE;")) {
+        return Status::DB_ERROR;
+    }
+
+    const char* sql =
+        "UPDATE students SET "
+        "name = ?1, "
+        "department = ?2, "
+        "semester = ?3, "
+        "contact = ?4, "
+        "cgpa = ?5, "
+        "created_at = ?6, "
+        "updated_at = ?7 "
+        "WHERE roll_no = ?8 COLLATE NOCASE;";
+
+    sqlite3_stmt* statement = nullptr;
+
+    int rc = sqlite3_prepare_v2(
+        db, sql, -1, &statement, nullptr
+    );
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        rollback(db);
+        return Status::DB_ERROR;
+    }
+
+    rc = bindText(statement, 1, student.name);
+
+    if (rc == SQLITE_OK) {
+        rc = bindText(statement, 2, student.department);
+    }
+
+    if (rc == SQLITE_OK) {
+        rc = sqlite3_bind_int(
+            statement, 3, student.semester
+        );
+    }
+
+    if (rc == SQLITE_OK) {
+        rc = bindText(statement, 4, student.contact);
+    }
+
+    if (rc == SQLITE_OK) {
+        rc = sqlite3_bind_double(
+            statement, 5, student.cgpa
+        );
+    }
+
+    if (rc == SQLITE_OK) {
+        rc = bindText(statement, 6, student.created_at);
+    }
+
+    if (rc == SQLITE_OK) {
+        rc = bindText(statement, 7, student.updated_at);
+    }
+
+    if (rc == SQLITE_OK) {
+        rc = bindText(statement, 8, student.roll_no);
+    }
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        rollback(db);
+        return Status::DB_ERROR;
+    }
+
+    rc = sqlite3_step(statement);
+
+    const int changed_rows = sqlite3_changes(db);
+    const int finalize_rc = sqlite3_finalize(statement);
+
+    if (rc != SQLITE_DONE || finalize_rc != SQLITE_OK) {
+        rollback(db);
+        return Status::DB_ERROR;
+    }
+
+    if (!execute(db, "COMMIT;")) {
+        rollback(db);
+        return Status::DB_ERROR;
+    }
+
+    return changed_rows > 0
+        ? Status::OK
+        : Status::NOT_FOUND;
+}
+
+Status StudentDAO::remove(const std::string& roll_no) {
+    sqlite3* db = database_.handle();
+
+    if (db == nullptr) {
+        return Status::DB_ERROR;
+    }
+
+    if (!execute(db, "BEGIN IMMEDIATE;")) {
+        return Status::DB_ERROR;
+    }
+
+    const char* sql =
+        "DELETE FROM students "
+        "WHERE roll_no = ?1 COLLATE NOCASE;";
+
+    sqlite3_stmt* statement = nullptr;
+
+    int rc = sqlite3_prepare_v2(
+        db, sql, -1, &statement, nullptr
+    );
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        rollback(db);
+        return Status::DB_ERROR;
+    }
+
+    rc = bindText(statement, 1, roll_no);
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        rollback(db);
+        return Status::DB_ERROR;
+    }
+
+    rc = sqlite3_step(statement);
+
+    const int changed_rows = sqlite3_changes(db);
+    const int finalize_rc = sqlite3_finalize(statement);
+
+    if (rc != SQLITE_DONE || finalize_rc != SQLITE_OK) {
+        rollback(db);
+        return Status::DB_ERROR;
+    }
+
+    if (!execute(db, "COMMIT;")) {
+        rollback(db);
+        return Status::DB_ERROR;
+    }
+
+    return changed_rows > 0
+        ? Status::OK
+        : Status::NOT_FOUND;
+}
+
+Result<int> StudentDAO::count() {
+    sqlite3* db = database_.handle();
+
+    if (db == nullptr) {
+        return {
+            Status::DB_ERROR,
+            0,
+            "database is not open"
+        };
+    }
+
+    const char* sql =
+        "SELECT COUNT(*) FROM students;";
+
+    sqlite3_stmt* statement = nullptr;
+
+    int rc = sqlite3_prepare_v2(
+        db, sql, -1, &statement, nullptr
+    );
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        return {
+            Status::DB_ERROR,
+            0,
+            "database query failed"
+        };
+    }
+
+    rc = sqlite3_step(statement);
+
+    if (rc != SQLITE_ROW) {
+        sqlite3_finalize(statement);
+        return {
+            Status::DB_ERROR,
+            0,
+            "database query failed"
+        };
+    }
+
+    const sqlite3_int64 total =
+        sqlite3_column_int64(statement, 0);
+
+    const int finalize_rc = sqlite3_finalize(statement);
+
+    if (finalize_rc != SQLITE_OK ||
+        total > std::numeric_limits<int>::max()) {
+        return {
+            Status::DB_ERROR,
+            0,
+            "database count failed"
+        };
+    }
+
+    return {
+        Status::OK,
+        static_cast<int>(total),
+        ""
+    };
+}
+
+Result<std::vector<Student>> StudentDAO::fetch(
+    int offset,
+    int limit
+) {
+    if (offset < 0 || limit < 0) {
+        return {
+            Status::VALIDATION_ERROR,
+            {},
+            "offset and limit must be non-negative"
+        };
+    }
+
+    sqlite3* db = database_.handle();
+
+    if (db == nullptr) {
+        return {
+            Status::DB_ERROR,
+            {},
+            "database is not open"
+        };
+    }
+
+    const char* sql =
+        "SELECT roll_no, name, department, semester, "
+        "contact, cgpa, created_at, updated_at "
+        "FROM students "
+        "ORDER BY roll_no COLLATE NOCASE ASC "
+        "LIMIT ?1 OFFSET ?2;";
+
+    sqlite3_stmt* statement = nullptr;
+
+    int rc = sqlite3_prepare_v2(
+        db, sql, -1, &statement, nullptr
+    );
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        return {
+            Status::DB_ERROR,
+            {},
+            "database query failed"
+        };
+    }
+
+    rc = sqlite3_bind_int(statement, 1, limit);
+
+    if (rc == SQLITE_OK) {
+        rc = sqlite3_bind_int(statement, 2, offset);
+    }
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        return {
+            Status::DB_ERROR,
+            {},
+            "database query failed"
+        };
+    }
+
+    std::vector<Student> students;
+
+    while ((rc = sqlite3_step(statement)) == SQLITE_ROW) {
+        students.push_back(readStudent(statement));
+    }
+
+    const int finalize_rc = sqlite3_finalize(statement);
+
+    if (rc != SQLITE_DONE || finalize_rc != SQLITE_OK) {
+        return {
+            Status::DB_ERROR,
+            {},
+            "database query failed"
+        };
+    }
+
+    return {
+        Status::OK,
+        std::move(students),
+        ""
+    };
+}
 
 Result<bool> StudentDAO::exists(
     const std::string& roll_no
@@ -201,19 +593,7 @@ Result<std::vector<Student>> StudentDAO::search(
     std::vector<Student> students;
 
     while ((rc = sqlite3_step(statement)) == SQLITE_ROW) {
-        Student student{};
-
-        student.roll_no = columnText(statement, 0);
-        student.name = columnText(statement, 1);
-        student.department = columnText(statement, 2);
-        student.semester =
-            sqlite3_column_int(statement, 3);
-        student.contact = columnText(statement, 4);
-        student.cgpa = sqlite3_column_double(statement, 5);
-        student.created_at = columnText(statement, 6);
-        student.updated_at = columnText(statement, 7);
-
-        students.push_back(std::move(student));
+        students.push_back(readStudent(statement));
     }
 
     const int finalize_rc =
@@ -388,18 +768,7 @@ Result<std::vector<Student>> StudentDAO::findByDeptSem(
     std::vector<Student> students;
 
     while ((rc = sqlite3_step(statement)) == SQLITE_ROW) {
-        Student student{};
-
-        student.roll_no = columnText(statement, 0);
-        student.name = columnText(statement, 1);
-        student.department = columnText(statement, 2);
-        student.semester = sqlite3_column_int(statement, 3);
-        student.contact = columnText(statement, 4);
-        student.cgpa = sqlite3_column_double(statement, 5);
-        student.created_at = columnText(statement, 6);
-        student.updated_at = columnText(statement, 7);
-
-        students.push_back(std::move(student));
+        students.push_back(readStudent(statement));
     }
 
     const int finalize_rc = sqlite3_finalize(statement);
