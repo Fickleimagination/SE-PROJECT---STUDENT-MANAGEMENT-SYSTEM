@@ -1,0 +1,295 @@
+Running main() from D:/W/B/src/googletest-1.18.0/googletest/src/gtest_main.cc
+[==========] Running 110 tests from 23 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from DatabaseTest
+[ RUN      ] DatabaseTest.MissingSchemaFileFailsAndClosesHandle
+[       OK ] DatabaseTest.MissingSchemaFileFailsAndClosesHandle (26 ms)
+[ RUN      ] DatabaseTest.FailedSchemaRollsBackPartialCreation
+[       OK ] DatabaseTest.FailedSchemaRollsBackPartialCreation (46 ms)
+[----------] 2 tests from DatabaseTest (72 ms total)
+
+[----------] 4 tests from StudentDAOSearchTest
+[ RUN      ] StudentDAOSearchTest.ExactRollSearchIgnoresLetterCase
+[       OK ] StudentDAOSearchTest.ExactRollSearchIgnoresLetterCase (40 ms)
+[ RUN      ] StudentDAOSearchTest.PartialNameSearchIsCaseInsensitiveAndSorted
+[       OK ] StudentDAOSearchTest.PartialNameSearchIsCaseInsensitiveAndSorted (44 ms)
+[ RUN      ] StudentDAOSearchTest.DisabledNameSearchDoesNotMatchNames
+[       OK ] StudentDAOSearchTest.DisabledNameSearchDoesNotMatchNames (42 ms)
+[ RUN      ] StudentDAOSearchTest.LikeWildcardCharactersAreTreatedLiterally
+[       OK ] StudentDAOSearchTest.LikeWildcardCharactersAreTreatedLiterally (41 ms)
+[----------] 4 tests from StudentDAOSearchTest (169 ms total)
+
+[----------] 6 tests from SearchServiceTest
+[ RUN      ] SearchServiceTest.ViewerGetsOnlyPublicFields
+[       OK ] SearchServiceTest.ViewerGetsOnlyPublicFields (0 ms)
+[ RUN      ] SearchServiceTest.AdministratorCanSearchPartialName
+[       OK ] SearchServiceTest.AdministratorCanSearchPartialName (0 ms)
+[ RUN      ] SearchServiceTest.RejectsOneCharacterAdminSearch
+[       OK ] SearchServiceTest.RejectsOneCharacterAdminSearch (0 ms)
+[ RUN      ] SearchServiceTest.EmptyResultsShowRequiredMessage
+[       OK ] SearchServiceTest.EmptyResultsShowRequiredMessage (0 ms)
+[ RUN      ] SearchServiceTest.RejectsExpiredSession
+[       OK ] SearchServiceTest.RejectsExpiredSession (0 ms)
+[ RUN      ] SearchServiceTest.PropagatesRepositoryDatabaseError
+[       OK ] SearchServiceTest.PropagatesRepositoryDatabaseError (0 ms)
+[----------] 6 tests from SearchServiceTest (0 ms total)
+
+[----------] 20 tests from StudentDAOTest
+[ RUN      ] StudentDAOTest.MissingStudentReturnsFalse
+[       OK ] StudentDAOTest.MissingStudentReturnsFalse (47 ms)
+[ RUN      ] StudentDAOTest.InsertAndFindStudent
+[       OK ] StudentDAOTest.InsertAndFindStudent (42 ms)
+[ RUN      ] StudentDAOTest.DuplicateRollNumberIsRejected
+[       OK ] StudentDAOTest.DuplicateRollNumberIsRejected (40 ms)
+[ RUN      ] StudentDAOTest.FindsByDepartmentAndSemester
+[       OK ] StudentDAOTest.FindsByDepartmentAndSemester (39 ms)
+[ RUN      ] StudentDAOTest.SQLLookingRollNumberIsTreatedAsData
+[       OK ] StudentDAOTest.SQLLookingRollNumberIsTreatedAsData (40 ms)
+[ RUN      ] StudentDAOTest.StudentPersistsAfterCloseAndReopen
+[       OK ] StudentDAOTest.StudentPersistsAfterCloseAndReopen (48 ms)
+[ RUN      ] StudentDAOTest.FailedInsertRollsBack
+[       OK ] StudentDAOTest.FailedInsertRollsBack (42 ms)
+[ RUN      ] StudentDAOTest.FindReturnsExistingStudent
+[       OK ] StudentDAOTest.FindReturnsExistingStudent (42 ms)
+[ RUN      ] StudentDAOTest.FindMissingStudentReturnsNotFound
+[       OK ] StudentDAOTest.FindMissingStudentReturnsNotFound (37 ms)
+[ RUN      ] StudentDAOTest.UpdateChangesExistingStudent
+[       OK ] StudentDAOTest.UpdateChangesExistingStudent (45 ms)
+[ RUN      ] StudentDAOTest.UpdateMissingStudentReturnsNotFound
+[       OK ] StudentDAOTest.UpdateMissingStudentReturnsNotFound (40 ms)
+[ RUN      ] StudentDAOTest.RemoveDeletesExistingStudent
+[       OK ] StudentDAOTest.RemoveDeletesExistingStudent (45 ms)
+[ RUN      ] StudentDAOTest.RemoveMissingStudentReturnsNotFound
+[       OK ] StudentDAOTest.RemoveMissingStudentReturnsNotFound (38 ms)
+[ RUN      ] StudentDAOTest.CountReturnsZeroForEmptyDatabase
+[       OK ] StudentDAOTest.CountReturnsZeroForEmptyDatabase (39 ms)
+[ RUN      ] StudentDAOTest.CountReturnsNumberOfStudents
+[       OK ] StudentDAOTest.CountReturnsNumberOfStudents (42 ms)
+[ RUN      ] StudentDAOTest.FetchReturnsStudentsInRollNumberOrder
+[       OK ] StudentDAOTest.FetchReturnsStudentsInRollNumberOrder (48 ms)
+[ RUN      ] StudentDAOTest.FetchReturnsCorrectPage
+[       OK ] StudentDAOTest.FetchReturnsCorrectPage (50 ms)
+[ RUN      ] StudentDAOTest.FetchBeyondAvailableRecordsReturnsEmpty
+[       OK ] StudentDAOTest.FetchBeyondAvailableRecordsReturnsEmpty (38 ms)
+[ RUN      ] StudentDAOTest.FetchRejectsNegativeOffset
+[       OK ] StudentDAOTest.FetchRejectsNegativeOffset (36 ms)
+[ RUN      ] StudentDAOTest.FetchRejectsNegativeLimit
+[       OK ] StudentDAOTest.FetchRejectsNegativeLimit (37 ms)
+[----------] 20 tests from StudentDAOTest (842 ms total)
+
+[----------] 6 tests from AuthServiceTest
+[ RUN      ] AuthServiceTest.EnforcesPasswordPolicy
+[       OK ] AuthServiceTest.EnforcesPasswordPolicy (0 ms)
+[ RUN      ] AuthServiceTest.SuccessfulLoginResetsFailedAttempts
+[       OK ] AuthServiceTest.SuccessfulLoginResetsFailedAttempts (93 ms)
+[ RUN      ] AuthServiceTest.FiveFailedAttemptsLockAccountFor300Seconds
+[       OK ] AuthServiceTest.FiveFailedAttemptsLockAccountFor300Seconds (257 ms)
+[ RUN      ] AuthServiceTest.UnknownAndWrongCredentialsUseSameMessage
+[       OK ] AuthServiceTest.UnknownAndWrongCredentialsUseSameMessage (92 ms)
+[ RUN      ] AuthServiceTest.PasswordChangeStoresNewPasswordHash
+[       OK ] AuthServiceTest.PasswordChangeStoresNewPasswordHash (142 ms)
+[ RUN      ] AuthServiceTest.LogoutAndIdleTimeoutEndAdminAccess
+[       OK ] AuthServiceTest.LogoutAndIdleTimeoutEndAdminAccess (48 ms)
+[----------] 6 tests from AuthServiceTest (634 ms total)
+
+[----------] 1 test from ConsoleUITest
+[ RUN      ] ConsoleUITest.DoesNotPrintPasswordToOutput
+[       OK ] ConsoleUITest.DoesNotPrintPasswordToOutput (98 ms)
+[----------] 1 test from ConsoleUITest (99 ms total)
+
+[----------] 15 tests from ReportServiceTest
+[ RUN      ] ReportServiceTest.NonAdminIsDenied
+[       OK ] ReportServiceTest.NonAdminIsDenied (0 ms)
+[ RUN      ] ReportServiceTest.IdleSessionIsDenied
+[       OK ] ReportServiceTest.IdleSessionIsDenied (0 ms)
+[ RUN      ] ReportServiceTest.InvalidDepartmentIsRejected
+[       OK ] ReportServiceTest.InvalidDepartmentIsRejected (0 ms)
+[ RUN      ] ReportServiceTest.SemesterOutOfRangeIsRejected
+[       OK ] ReportServiceTest.SemesterOutOfRangeIsRejected (0 ms)
+[ RUN      ] ReportServiceTest.ClassListOrderedByRollNumber
+[       OK ] ReportServiceTest.ClassListOrderedByRollNumber (0 ms)
+[ RUN      ] ReportServiceTest.AverageRoundedToTwoDecimals
+[       OK ] ReportServiceTest.AverageRoundedToTwoDecimals (0 ms)
+[ RUN      ] ReportServiceTest.EmptySelectionShowsMessage
+[       OK ] ReportServiceTest.EmptySelectionShowsMessage (0 ms)
+[ RUN      ] ReportServiceTest.TopperListIncludesAllTies
+[       OK ] ReportServiceTest.TopperListIncludesAllTies (0 ms)
+[ RUN      ] ReportServiceTest.DatabaseErrorIsPropagated
+[       OK ] ReportServiceTest.DatabaseErrorIsPropagated (0 ms)
+[ RUN      ] ReportServiceTest.ExportWritesCsvAndAudits
+[       OK ] ReportServiceTest.ExportWritesCsvAndAudits (13 ms)
+[ RUN      ] ReportServiceTest.ExportWritesTabSeparatedTxt
+[       OK ] ReportServiceTest.ExportWritesTabSeparatedTxt (4 ms)
+[ RUN      ] ReportServiceTest.EmptyReportCreatesNoFile
+[       OK ] ReportServiceTest.EmptyReportCreatesNoFile (0 ms)
+[ RUN      ] ReportServiceTest.ExportDeniedWithoutSession
+[       OK ] ReportServiceTest.ExportDeniedWithoutSession (0 ms)
+[ RUN      ] ReportServiceTest.FutureSessionTimestampIsDenied
+[       OK ] ReportServiceTest.FutureSessionTimestampIsDenied (0 ms)
+[ RUN      ] ReportServiceTest.CsvQuotesFieldsWithCommas
+[       OK ] ReportServiceTest.CsvQuotesFieldsWithCommas (12 ms)
+[----------] 15 tests from ReportServiceTest (34 ms total)
+
+[----------] 15 tests from RecordServiceAddTest
+[ RUN      ] RecordServiceAddTest.AddsValidRecordWithAllSixFields
+[       OK ] RecordServiceAddTest.AddsValidRecordWithAllSixFields (0 ms)
+[ RUN      ] RecordServiceAddTest.ContactIsOptional
+[       OK ] RecordServiceAddTest.ContactIsOptional (0 ms)
+[ RUN      ] RecordServiceAddTest.StoresRollNoUpperCaseAndNameTrimmed
+[       OK ] RecordServiceAddTest.StoresRollNoUpperCaseAndNameTrimmed (0 ms)
+[ RUN      ] RecordServiceAddTest.SetsBothTimestampsInRequiredFormat
+[       OK ] RecordServiceAddTest.SetsBothTimestampsInRequiredFormat (0 ms)
+[ RUN      ] RecordServiceAddTest.RejectsDuplicateRollNoAndKeepsCountUnchanged
+[       OK ] RecordServiceAddTest.RejectsDuplicateRollNoAndKeepsCountUnchanged (0 ms)
+[ RUN      ] RecordServiceAddTest.DuplicateIsDetectedIgnoringRollNoCase
+[       OK ] RecordServiceAddTest.DuplicateIsDetectedIgnoringRollNoCase (0 ms)
+[ RUN      ] RecordServiceAddTest.PassesThroughDuplicateKeyFromRepository
+[       OK ] RecordServiceAddTest.PassesThroughDuplicateKeyFromRepository (0 ms)
+[ RUN      ] RecordServiceAddTest.ViewerSessionIsDenied
+[       OK ] RecordServiceAddTest.ViewerSessionIsDenied (0 ms)
+[ RUN      ] RecordServiceAddTest.IdleSessionIsDenied
+[       OK ] RecordServiceAddTest.IdleSessionIsDenied (0 ms)
+[ RUN      ] RecordServiceAddTest.RejectsEachInvalidFieldAndSavesNothing
+[       OK ] RecordServiceAddTest.RejectsEachInvalidFieldAndSavesNothing (0 ms)
+[ RUN      ] RecordServiceAddTest.ReportsDbErrorWhenInsertFails
+[       OK ] RecordServiceAddTest.ReportsDbErrorWhenInsertFails (0 ms)
+[ RUN      ] RecordServiceAddTest.ReportsDbErrorWhenExistsCheckFails
+[       OK ] RecordServiceAddTest.ReportsDbErrorWhenExistsCheckFails (0 ms)
+[ RUN      ] RecordServiceAddTest.ConvertsUnexpectedExceptionToInternalError
+[       OK ] RecordServiceAddTest.ConvertsUnexpectedExceptionToInternalError (0 ms)
+[ RUN      ] RecordServiceAddTest.AuditsExactlyOneRecordAddedEventOnSuccess
+[       OK ] RecordServiceAddTest.AuditsExactlyOneRecordAddedEventOnSuccess (0 ms)
+[ RUN      ] RecordServiceAddTest.NoAuditRowForRejectedAdds
+[       OK ] RecordServiceAddTest.NoAuditRowForRejectedAdds (0 ms)
+[----------] 15 tests from RecordServiceAddTest (1 ms total)
+
+[----------] 10 tests from RecordServiceUpdateTest
+[ RUN      ] RecordServiceUpdateTest.ChangesEachEditableField
+[       OK ] RecordServiceUpdateTest.ChangesEachEditableField (0 ms)
+[ RUN      ] RecordServiceUpdateTest.KeepsFieldsNotInThePatch
+[       OK ] RecordServiceUpdateTest.KeepsFieldsNotInThePatch (0 ms)
+[ RUN      ] RecordServiceUpdateTest.EmptyPatchChangesOnlyUpdatedAt
+[       OK ] RecordServiceUpdateTest.EmptyPatchChangesOnlyUpdatedAt (0 ms)
+[ RUN      ] RecordServiceUpdateTest.RollNoIsFoundIgnoringCaseAndSpaces
+[       OK ] RecordServiceUpdateTest.RollNoIsFoundIgnoringCaseAndSpaces (0 ms)
+[ RUN      ] RecordServiceUpdateTest.UnknownRollNoIsNotFoundAndChangesNothing
+[       OK ] RecordServiceUpdateTest.UnknownRollNoIsNotFoundAndChangesNothing (0 ms)
+[ RUN      ] RecordServiceUpdateTest.RejectsInvalidValuesAndKeepsStoredRecord
+[       OK ] RecordServiceUpdateTest.RejectsInvalidValuesAndKeepsStoredRecord (0 ms)
+[ RUN      ] RecordServiceUpdateTest.ClearingContactIsAllowed
+[       OK ] RecordServiceUpdateTest.ClearingContactIsAllowed (0 ms)
+[ RUN      ] RecordServiceUpdateTest.ViewerAndIdleSessionsAreDenied
+[       OK ] RecordServiceUpdateTest.ViewerAndIdleSessionsAreDenied (0 ms)
+[ RUN      ] RecordServiceUpdateTest.AuditsRecordUpdated
+[       OK ] RecordServiceUpdateTest.AuditsRecordUpdated (0 ms)
+[ RUN      ] RecordServiceUpdateTest.StorageFailuresArePassedThroughAndNotAudited
+[       OK ] RecordServiceUpdateTest.StorageFailuresArePassedThroughAndNotAudited (0 ms)
+[----------] 10 tests from RecordServiceUpdateTest (1 ms total)
+
+[----------] 1 test from RecordServiceConfirm
+[ RUN      ] RecordServiceConfirm.OnlyExactYesConfirms
+[       OK ] RecordServiceConfirm.OnlyExactYesConfirms (0 ms)
+[----------] 1 test from RecordServiceConfirm (0 ms total)
+
+[----------] 7 tests from RecordServiceDeleteTest
+[ RUN      ] RecordServiceDeleteTest.DeletesExistingRecord
+[       OK ] RecordServiceDeleteTest.DeletesExistingRecord (0 ms)
+[ RUN      ] RecordServiceDeleteTest.RollNoIsFoundIgnoringCase
+[       OK ] RecordServiceDeleteTest.RollNoIsFoundIgnoringCase (0 ms)
+[ RUN      ] RecordServiceDeleteTest.UnknownRollNoIsNotFoundAndChangesNothing
+[       OK ] RecordServiceDeleteTest.UnknownRollNoIsNotFoundAndChangesNothing (0 ms)
+[ RUN      ] RecordServiceDeleteTest.ViewerAndIdleSessionsAreDenied
+[       OK ] RecordServiceDeleteTest.ViewerAndIdleSessionsAreDenied (0 ms)
+[ RUN      ] RecordServiceDeleteTest.AuditsRecordDeleted
+[       OK ] RecordServiceDeleteTest.AuditsRecordDeleted (0 ms)
+[ RUN      ] RecordServiceDeleteTest.StorageFailuresArePassedThroughAndNotAudited
+[       OK ] RecordServiceDeleteTest.StorageFailuresArePassedThroughAndNotAudited (0 ms)
+[ RUN      ] RecordServiceDeleteTest.GetStudentReturnsRecordOrNotFound
+[       OK ] RecordServiceDeleteTest.GetStudentReturnsRecordOrNotFound (0 ms)
+[----------] 7 tests from RecordServiceDeleteTest (0 ms total)
+
+[----------] 6 tests from RecordServiceListTest
+[ RUN      ] RecordServiceListTest.ThreePagesOfTwentyTwentyFive
+[       OK ] RecordServiceListTest.ThreePagesOfTwentyTwentyFive (1 ms)
+[ RUN      ] RecordServiceListTest.OrderedByRollNoAscendingAcrossPages
+[       OK ] RecordServiceListTest.OrderedByRollNoAscendingAcrossPages (1 ms)
+[ RUN      ] RecordServiceListTest.PageOutOfRangeIsValidationError
+[       OK ] RecordServiceListTest.PageOutOfRangeIsValidationError (1 ms)
+[ RUN      ] RecordServiceListTest.ExactMultipleOfPageSizeHasNoEmptyLastPage
+[       OK ] RecordServiceListTest.ExactMultipleOfPageSizeHasNoEmptyLastPage (1 ms)
+[ RUN      ] RecordServiceListTest.ViewerAndIdleSessionsAreDenied
+[       OK ] RecordServiceListTest.ViewerAndIdleSessionsAreDenied (1 ms)
+[ RUN      ] RecordServiceListTest.StorageFailuresArePassedThrough
+[       OK ] RecordServiceListTest.StorageFailuresArePassedThrough (1 ms)
+[----------] 6 tests from RecordServiceListTest (9 ms total)
+
+[----------] 1 test from RecordServiceListEmpty
+[ RUN      ] RecordServiceListEmpty.EmptyDatabaseIsOkWithEmptyPageOne
+[       OK ] RecordServiceListEmpty.EmptyDatabaseIsOkWithEmptyPageOne (0 ms)
+[----------] 1 test from RecordServiceListEmpty (0 ms total)
+
+[----------] 1 test from RecordServiceDefaults
+[ RUN      ] RecordServiceDefaults.WorksWithoutAuditHookAndWithSystemClock
+[       OK ] RecordServiceDefaults.WorksWithoutAuditHookAndWithSystemClock (0 ms)
+[----------] 1 test from RecordServiceDefaults (0 ms total)
+
+[----------] 1 test from ValidatorRollNo
+[ RUN      ] ValidatorRollNo.AcceptsAndRejectsPerFitCriterion
+[       OK ] ValidatorRollNo.AcceptsAndRejectsPerFitCriterion (0 ms)
+[----------] 1 test from ValidatorRollNo (0 ms total)
+
+[----------] 2 tests from ValidatorName
+[ RUN      ] ValidatorName.AcceptsAndRejectsPerFitCriterion
+[       OK ] ValidatorName.AcceptsAndRejectsPerFitCriterion (0 ms)
+[ RUN      ] ValidatorName.CountsCharactersNotBytes
+[       OK ] ValidatorName.CountsCharactersNotBytes (0 ms)
+[----------] 2 tests from ValidatorName (0 ms total)
+
+[----------] 1 test from ValidatorSemester
+[ RUN      ] ValidatorSemester.AcceptsAndRejectsPerFitCriterion
+[       OK ] ValidatorSemester.AcceptsAndRejectsPerFitCriterion (0 ms)
+[----------] 1 test from ValidatorSemester (0 ms total)
+
+[----------] 1 test from ValidatorCgpa
+[ RUN      ] ValidatorCgpa.AcceptsAndRejectsPerFitCriterion
+[       OK ] ValidatorCgpa.AcceptsAndRejectsPerFitCriterion (0 ms)
+[----------] 1 test from ValidatorCgpa (0 ms total)
+
+[----------] 2 tests from ValidatorDepartment
+[ RUN      ] ValidatorDepartment.AcceptsListedCodesAndShowsListOnFailure
+[       OK ] ValidatorDepartment.AcceptsListedCodesAndShowsListOnFailure (0 ms)
+[ RUN      ] ValidatorDepartment.UsesCustomCodeList
+[       OK ] ValidatorDepartment.UsesCustomCodeList (0 ms)
+[----------] 2 tests from ValidatorDepartment (0 ms total)
+
+[----------] 1 test from ValidatorContact
+[ RUN      ] ValidatorContact.OptionalPhoneOrEmail
+[       OK ] ValidatorContact.OptionalPhoneOrEmail (0 ms)
+[----------] 1 test from ValidatorContact (0 ms total)
+
+[----------] 2 tests from ValidatorField
+[ RUN      ] ValidatorField.UnknownFieldIsRejected
+[       OK ] ValidatorField.UnknownFieldIsRejected (0 ms)
+[ RUN      ] ValidatorField.ErrorNamesTheFailingField
+[       OK ] ValidatorField.ErrorNamesTheFailingField (0 ms)
+[----------] 2 tests from ValidatorField (0 ms total)
+
+[----------] 4 tests from ValidatorStudent
+[ RUN      ] ValidatorStudent.AcceptsGoodRecord
+[       OK ] ValidatorStudent.AcceptsGoodRecord (0 ms)
+[ RUN      ] ValidatorStudent.ReportsFirstBadFieldInPromptOrder
+[       OK ] ValidatorStudent.ReportsFirstBadFieldInPromptOrder (0 ms)
+[ RUN      ] ValidatorStudent.RejectsCgpaOutOfRangeOrTooPrecise
+[       OK ] ValidatorStudent.RejectsCgpaOutOfRangeOrTooPrecise (0 ms)
+[ RUN      ] ValidatorStudent.RejectsNaNCgpa
+[       OK ] ValidatorStudent.RejectsNaNCgpa (0 ms)
+[----------] 4 tests from ValidatorStudent (0 ms total)
+
+[----------] 1 test from ValidatorNormalize
+[ RUN      ] ValidatorNormalize.UppercasesRollNoAndTrimsText
+[       OK ] ValidatorNormalize.UppercasesRollNoAndTrimsText (0 ms)
+[----------] 1 test from ValidatorNormalize (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 110 tests from 23 test suites ran. (1866 ms total)
+[  PASSED  ] 110 tests.
