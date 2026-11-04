@@ -181,7 +181,9 @@ Result<Page<Student>> RecordService::listStudents(const Session& session, int pa
         if (total.status != Status::OK) return {total.status, Page<Student>{}, ""};
 
         const int totalPages = total.value == 0 ? 1 : (total.value + kPageSize - 1) / kPageSize;
-        if (page < 1 || page > totalPages) return {Status::VALIDATION_ERROR, Page<Student>{}, ""};
+        if (page < 1 || page > totalPages) {
+            return {Status::VALIDATION_ERROR, Page<Student>{}, ""};
+        }
 
         Result<std::vector<Student>> rows = repo_.fetch((page - 1) * kPageSize, kPageSize);
         if (rows.status != Status::OK) return {rows.status, Page<Student>{}, ""};
