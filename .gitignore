@@ -1,5 +1,8 @@
 ﻿report_tests
 
+
+build/
+.vscode/
 # CMake build output
 /build/
 /build-coverage/
