@@ -26,6 +26,20 @@ public:
 
     Status insert(const Student& student) override;
 
+    // StudentRepository CRUD and pagination methods.
+    Result<Student> find(const std::string& roll_no) override;
+
+    Status update(const Student& student) override;
+
+    Status remove(const std::string& roll_no) override;
+
+    Result<int> count() override;
+
+    Result<std::vector<Student>> fetch(
+        int offset,
+        int limit
+    ) override;
+
     // Existing report-support interface.
     Result<std::vector<Student>> findByDeptSem(
     const std::string& department,
