@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="110" failures="0" disabled="0" errors="0" time="1.866" timestamp="2026-11-04T09:23:56.560" name="AllTests">
+  <testsuite name="DatabaseTest" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0.072" timestamp="2026-11-04T09:23:56.560">
+    <testcase name="MissingSchemaFileFailsAndClosesHandle" file="C:/Users/bvaru/Downloads/SRMS-git/tests/database_test.cpp" line="52" status="run" result="completed" time="0.026" timestamp="2026-11-04T09:23:56.560" classname="DatabaseTest" />
+    <testcase name="FailedSchemaRollsBackPartialCreation" file="C:/Users/bvaru/Downloads/SRMS-git/tests/database_test.cpp" line="67" status="run" result="completed" time="0.046" timestamp="2026-11-04T09:23:56.586" classname="DatabaseTest" />
+  </testsuite>
+  <testsuite name="StudentDAOSearchTest" tests="4" failures="0" disabled="0" skipped="0" errors="0" time="0.169" timestamp="2026-11-04T09:23:56.633">
+    <testcase name="ExactRollSearchIgnoresLetterCase" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_search_test.cpp" line="66" status="run" result="completed" time="0.04" timestamp="2026-11-04T09:23:56.633" classname="StudentDAOSearchTest" />
+    <testcase name="PartialNameSearchIsCaseInsensitiveAndSorted" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_search_test.cpp" line="79" status="run" result="completed" time="0.044" timestamp="2026-11-04T09:23:56.673" classname="StudentDAOSearchTest" />
+    <testcase name="DisabledNameSearchDoesNotMatchNames" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_search_test.cpp" line="97" status="run" result="completed" time="0.042" timestamp="2026-11-04T09:23:56.717" classname="StudentDAOSearchTest" />
+    <testcase name="LikeWildcardCharactersAreTreatedLiterally" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_search_test.cpp" line="109" status="run" result="completed" time="0.041" timestamp="2026-11-04T09:23:56.760" classname="StudentDAOSearchTest" />
+  </testsuite>
+  <testsuite name="SearchServiceTest" tests="6" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:56.802">
+    <testcase name="ViewerGetsOnlyPublicFields" file="C:/Users/bvaru/Downloads/SRMS-git/tests/search_service_test.cpp" line="49" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:56.802" classname="SearchServiceTest" />
+    <testcase name="AdministratorCanSearchPartialName" file="C:/Users/bvaru/Downloads/SRMS-git/tests/search_service_test.cpp" line="76" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:56.802" classname="SearchServiceTest" />
+    <testcase name="RejectsOneCharacterAdminSearch" file="C:/Users/bvaru/Downloads/SRMS-git/tests/search_service_test.cpp" line="96" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:56.802" classname="SearchServiceTest" />
+    <testcase name="EmptyResultsShowRequiredMessage" file="C:/Users/bvaru/Downloads/SRMS-git/tests/search_service_test.cpp" line="111" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:56.802" classname="SearchServiceTest" />
+    <testcase name="RejectsExpiredSession" file="C:/Users/bvaru/Downloads/SRMS-git/tests/search_service_test.cpp" line="128" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:56.802" classname="SearchServiceTest" />
+    <testcase name="PropagatesRepositoryDatabaseError" file="C:/Users/bvaru/Downloads/SRMS-git/tests/search_service_test.cpp" line="143" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:56.802" classname="SearchServiceTest" />
+  </testsuite>
+  <testsuite name="StudentDAOTest" tests="20" failures="0" disabled="0" skipped="0" errors="0" time="0.842" timestamp="2026-11-04T09:23:56.802">
+    <testcase name="MissingStudentReturnsFalse" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="64" status="run" result="completed" time="0.047" timestamp="2026-11-04T09:23:56.802" classname="StudentDAOTest" />
+    <testcase name="InsertAndFindStudent" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="71" status="run" result="completed" time="0.042" timestamp="2026-11-04T09:23:56.850" classname="StudentDAOTest" />
+    <testcase name="DuplicateRollNumberIsRejected" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="85" status="run" result="completed" time="0.04" timestamp="2026-11-04T09:23:56.892" classname="StudentDAOTest" />
+    <testcase name="FindsByDepartmentAndSemester" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="99" status="run" result="completed" time="0.039" timestamp="2026-11-04T09:23:56.932" classname="StudentDAOTest" />
+    <testcase name="SQLLookingRollNumberIsTreatedAsData" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="129" status="run" result="completed" time="0.04" timestamp="2026-11-04T09:23:56.972" classname="StudentDAOTest" />
+    <testcase name="StudentPersistsAfterCloseAndReopen" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="151" status="run" result="completed" time="0.048" timestamp="2026-11-04T09:23:57.012" classname="StudentDAOTest" />
+    <testcase name="FailedInsertRollsBack" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="169" status="run" result="completed" time="0.042" timestamp="2026-11-04T09:23:57.061" classname="StudentDAOTest" />
+    <testcase name="FindReturnsExistingStudent" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="203" status="run" result="completed" time="0.042" timestamp="2026-11-04T09:23:57.103" classname="StudentDAOTest" />
+    <testcase name="FindMissingStudentReturnsNotFound" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="218" status="run" result="completed" time="0.037" timestamp="2026-11-04T09:23:57.145" classname="StudentDAOTest" />
+    <testcase name="UpdateChangesExistingStudent" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="226" status="run" result="completed" time="0.045" timestamp="2026-11-04T09:23:57.183" classname="StudentDAOTest" />
+    <testcase name="UpdateMissingStudentReturnsNotFound" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="253" status="run" result="completed" time="0.04" timestamp="2026-11-04T09:23:57.228" classname="StudentDAOTest" />
+    <testcase name="RemoveDeletesExistingStudent" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="264" status="run" result="completed" time="0.045" timestamp="2026-11-04T09:23:57.269" classname="StudentDAOTest" />
+    <testcase name="RemoveMissingStudentReturnsNotFound" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="279" status="run" result="completed" time="0.038" timestamp="2026-11-04T09:23:57.314" classname="StudentDAOTest" />
+    <testcase name="CountReturnsZeroForEmptyDatabase" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="288" status="run" result="completed" time="0.039" timestamp="2026-11-04T09:23:57.352" classname="StudentDAOTest" />
+    <testcase name="CountReturnsNumberOfStudents" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="295" status="run" result="completed" time="0.042" timestamp="2026-11-04T09:23:57.391" classname="StudentDAOTest" />
+    <testcase name="FetchReturnsStudentsInRollNumberOrder" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="312" status="run" result="completed" time="0.048" timestamp="2026-11-04T09:23:57.434" classname="StudentDAOTest" />
+    <testcase name="FetchReturnsCorrectPage" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="335" status="run" result="completed" time="0.05" timestamp="2026-11-04T09:23:57.483" classname="StudentDAOTest" />
+    <testcase name="FetchBeyondAvailableRecordsReturnsEmpty" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="356" status="run" result="completed" time="0.038" timestamp="2026-11-04T09:23:57.533" classname="StudentDAOTest" />
+    <testcase name="FetchRejectsNegativeOffset" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="363" status="run" result="completed" time="0.036" timestamp="2026-11-04T09:23:57.571" classname="StudentDAOTest" />
+    <testcase name="FetchRejectsNegativeLimit" file="C:/Users/bvaru/Downloads/SRMS-git/tests/student_dao_test.cpp" line="369" status="run" result="completed" time="0.037" timestamp="2026-11-04T09:23:57.608" classname="StudentDAOTest" />
+  </testsuite>
+  <testsuite name="AuthServiceTest" tests="6" failures="0" disabled="0" skipped="0" errors="0" time="0.634" timestamp="2026-11-04T09:23:57.645">
+    <testcase name="EnforcesPasswordPolicy" file="C:/Users/bvaru/Downloads/SRMS-git/tests/auth_service_test.cpp" line="122" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:57.645" classname="AuthServiceTest" />
+    <testcase name="SuccessfulLoginResetsFailedAttempts" file="C:/Users/bvaru/Downloads/SRMS-git/tests/auth_service_test.cpp" line="130" status="run" result="completed" time="0.093" timestamp="2026-11-04T09:23:57.645" classname="AuthServiceTest" />
+    <testcase name="FiveFailedAttemptsLockAccountFor300Seconds" file="C:/Users/bvaru/Downloads/SRMS-git/tests/auth_service_test.cpp" line="148" status="run" result="completed" time="0.257" timestamp="2026-11-04T09:23:57.739" classname="AuthServiceTest" />
+    <testcase name="UnknownAndWrongCredentialsUseSameMessage" file="C:/Users/bvaru/Downloads/SRMS-git/tests/auth_service_test.cpp" line="168" status="run" result="completed" time="0.092" timestamp="2026-11-04T09:23:57.996" classname="AuthServiceTest" />
+    <testcase name="PasswordChangeStoresNewPasswordHash" file="C:/Users/bvaru/Downloads/SRMS-git/tests/auth_service_test.cpp" line="182" status="run" result="completed" time="0.142" timestamp="2026-11-04T09:23:58.089" classname="AuthServiceTest" />
+    <testcase name="LogoutAndIdleTimeoutEndAdminAccess" file="C:/Users/bvaru/Downloads/SRMS-git/tests/auth_service_test.cpp" line="210" status="run" result="completed" time="0.048" timestamp="2026-11-04T09:23:58.231" classname="AuthServiceTest" />
+  </testsuite>
+  <testsuite name="ConsoleUITest" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0.099" timestamp="2026-11-04T09:23:58.280">
+    <testcase name="DoesNotPrintPasswordToOutput" file="C:/Users/bvaru/Downloads/SRMS-git/tests/auth_service_test.cpp" line="233" status="run" result="completed" time="0.098" timestamp="2026-11-04T09:23:58.280" classname="ConsoleUITest" />
+  </testsuite>
+  <testsuite name="ReportServiceTest" tests="15" failures="0" disabled="0" skipped="0" errors="0" time="0.034" timestamp="2026-11-04T09:23:58.379">
+    <testcase name="NonAdminIsDenied" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="123" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.379" classname="ReportServiceTest" />
+    <testcase name="IdleSessionIsDenied" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="133" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.379" classname="ReportServiceTest" />
+    <testcase name="InvalidDepartmentIsRejected" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="143" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.379" classname="ReportServiceTest" />
+    <testcase name="SemesterOutOfRangeIsRejected" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="151" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.380" classname="ReportServiceTest" />
+    <testcase name="ClassListOrderedByRollNumber" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="167" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.380" classname="ReportServiceTest" />
+    <testcase name="AverageRoundedToTwoDecimals" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="179" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.380" classname="ReportServiceTest" />
+    <testcase name="EmptySelectionShowsMessage" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="195" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.380" classname="ReportServiceTest" />
+    <testcase name="TopperListIncludesAllTies" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="208" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.381" classname="ReportServiceTest" />
+    <testcase name="DatabaseErrorIsPropagated" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="221" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.381" classname="ReportServiceTest" />
+    <testcase name="ExportWritesCsvAndAudits" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="233" status="run" result="completed" time="0.013" timestamp="2026-11-04T09:23:58.381" classname="ReportServiceTest" />
+    <testcase name="ExportWritesTabSeparatedTxt" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="268" status="run" result="completed" time="0.004" timestamp="2026-11-04T09:23:58.394" classname="ReportServiceTest" />
+    <testcase name="EmptyReportCreatesNoFile" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="293" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.399" classname="ReportServiceTest" />
+    <testcase name="ExportDeniedWithoutSession" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="309" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.400" classname="ReportServiceTest" />
+    <testcase name="FutureSessionTimestampIsDenied" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="325" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.400" classname="ReportServiceTest" />
+    <testcase name="CsvQuotesFieldsWithCommas" file="C:/Users/bvaru/Downloads/SRMS-git/tests/report_service_test.cpp" line="331" status="run" result="completed" time="0.012" timestamp="2026-11-04T09:23:58.400" classname="ReportServiceTest" />
+  </testsuite>
+  <testsuite name="RecordServiceAddTest" tests="15" failures="0" disabled="0" skipped="0" errors="0" time="0.001" timestamp="2026-11-04T09:23:58.413">
+    <testcase name="AddsValidRecordWithAllSixFields" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="105" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.413" classname="RecordServiceAddTest" />
+    <testcase name="ContactIsOptional" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="116" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.413" classname="RecordServiceAddTest" />
+    <testcase name="StoresRollNoUpperCaseAndNameTrimmed" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="122" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.413" classname="RecordServiceAddTest" />
+    <testcase name="SetsBothTimestampsInRequiredFormat" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="132" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.413" classname="RecordServiceAddTest" />
+    <testcase name="RejectsDuplicateRollNoAndKeepsCountUnchanged" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="145" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="DuplicateIsDetectedIgnoringRollNoCase" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="154" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="PassesThroughDuplicateKeyFromRepository" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="162" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="ViewerSessionIsDenied" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="169" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="IdleSessionIsDenied" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="176" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="RejectsEachInvalidFieldAndSavesNothing" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="188" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="ReportsDbErrorWhenInsertFails" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="203" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="ReportsDbErrorWhenExistsCheckFails" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="210" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="ConvertsUnexpectedExceptionToInternalError" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="216" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="AuditsExactlyOneRecordAddedEventOnSuccess" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="222" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+    <testcase name="NoAuditRowForRejectedAdds" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="231" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceAddTest" />
+  </testsuite>
+  <testsuite name="RecordServiceUpdateTest" tests="10" failures="0" disabled="0" skipped="0" errors="0" time="0.001" timestamp="2026-11-04T09:23:58.414">
+    <testcase name="ChangesEachEditableField" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="247" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.414" classname="RecordServiceUpdateTest" />
+    <testcase name="KeepsFieldsNotInThePatch" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="264" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.415" classname="RecordServiceUpdateTest" />
+    <testcase name="EmptyPatchChangesOnlyUpdatedAt" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="276" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.415" classname="RecordServiceUpdateTest" />
+    <testcase name="RollNoIsFoundIgnoringCaseAndSpaces" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="288" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.415" classname="RecordServiceUpdateTest" />
+    <testcase name="UnknownRollNoIsNotFoundAndChangesNothing" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="296" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.415" classname="RecordServiceUpdateTest" />
+    <testcase name="RejectsInvalidValuesAndKeepsStoredRecord" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="306" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.415" classname="RecordServiceUpdateTest" />
+    <testcase name="ClearingContactIsAllowed" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="320" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.415" classname="RecordServiceUpdateTest" />
+    <testcase name="ViewerAndIdleSessionsAreDenied" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="328" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.415" classname="RecordServiceUpdateTest" />
+    <testcase name="AuditsRecordUpdated" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="338" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.415" classname="RecordServiceUpdateTest" />
+    <testcase name="StorageFailuresArePassedThroughAndNotAudited" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="349" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.415" classname="RecordServiceUpdateTest" />
+  </testsuite>
+  <testsuite name="RecordServiceConfirm" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.416">
+    <testcase name="OnlyExactYesConfirms" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="366" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.416" classname="RecordServiceConfirm" />
+  </testsuite>
+  <testsuite name="RecordServiceDeleteTest" tests="7" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.416">
+    <testcase name="DeletesExistingRecord" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="372" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.416" classname="RecordServiceDeleteTest" />
+    <testcase name="RollNoIsFoundIgnoringCase" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="377" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.416" classname="RecordServiceDeleteTest" />
+    <testcase name="UnknownRollNoIsNotFoundAndChangesNothing" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="383" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.416" classname="RecordServiceDeleteTest" />
+    <testcase name="ViewerAndIdleSessionsAreDenied" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="390" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.416" classname="RecordServiceDeleteTest" />
+    <testcase name="AuditsRecordDeleted" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="398" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.416" classname="RecordServiceDeleteTest" />
+    <testcase name="StorageFailuresArePassedThroughAndNotAudited" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="406" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.416" classname="RecordServiceDeleteTest" />
+    <testcase name="GetStudentReturnsRecordOrNotFound" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="417" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.416" classname="RecordServiceDeleteTest" />
+  </testsuite>
+  <testsuite name="RecordServiceListTest" tests="6" failures="0" disabled="0" skipped="0" errors="0" time="0.009" timestamp="2026-11-04T09:23:58.416">
+    <testcase name="ThreePagesOfTwentyTwentyFive" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="441" status="run" result="completed" time="0.001" timestamp="2026-11-04T09:23:58.416" classname="RecordServiceListTest" />
+    <testcase name="OrderedByRollNoAscendingAcrossPages" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="454" status="run" result="completed" time="0.001" timestamp="2026-11-04T09:23:58.418" classname="RecordServiceListTest" />
+    <testcase name="PageOutOfRangeIsValidationError" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="464" status="run" result="completed" time="0.001" timestamp="2026-11-04T09:23:58.419" classname="RecordServiceListTest" />
+    <testcase name="ExactMultipleOfPageSizeHasNoEmptyLastPage" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="470" status="run" result="completed" time="0.001" timestamp="2026-11-04T09:23:58.421" classname="RecordServiceListTest" />
+    <testcase name="ViewerAndIdleSessionsAreDenied" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="481" status="run" result="completed" time="0.001" timestamp="2026-11-04T09:23:58.422" classname="RecordServiceListTest" />
+    <testcase name="StorageFailuresArePassedThrough" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="486" status="run" result="completed" time="0.001" timestamp="2026-11-04T09:23:58.424" classname="RecordServiceListTest" />
+  </testsuite>
+  <testsuite name="RecordServiceListEmpty" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.425">
+    <testcase name="EmptyDatabaseIsOkWithEmptyPageOne" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="494" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.425" classname="RecordServiceListEmpty" />
+  </testsuite>
+  <testsuite name="RecordServiceDefaults" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.425">
+    <testcase name="WorksWithoutAuditHookAndWithSystemClock" file="C:/Users/bvaru/Downloads/SRMS-git/tests/record_service_test.cpp" line="505" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.425" classname="RecordServiceDefaults" />
+  </testsuite>
+  <testsuite name="ValidatorRollNo" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.425">
+    <testcase name="AcceptsAndRejectsPerFitCriterion" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="26" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.425" classname="ValidatorRollNo" />
+  </testsuite>
+  <testsuite name="ValidatorName" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.426">
+    <testcase name="AcceptsAndRejectsPerFitCriterion" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="38" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorName" />
+    <testcase name="CountsCharactersNotBytes" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="52" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorName" />
+  </testsuite>
+  <testsuite name="ValidatorSemester" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.426">
+    <testcase name="AcceptsAndRejectsPerFitCriterion" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="58" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorSemester" />
+  </testsuite>
+  <testsuite name="ValidatorCgpa" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.426">
+    <testcase name="AcceptsAndRejectsPerFitCriterion" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="69" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorCgpa" />
+  </testsuite>
+  <testsuite name="ValidatorDepartment" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.426">
+    <testcase name="AcceptsListedCodesAndShowsListOnFailure" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="82" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorDepartment" />
+    <testcase name="UsesCustomCodeList" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="90" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorDepartment" />
+  </testsuite>
+  <testsuite name="ValidatorContact" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.426">
+    <testcase name="OptionalPhoneOrEmail" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="97" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorContact" />
+  </testsuite>
+  <testsuite name="ValidatorField" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.426">
+    <testcase name="UnknownFieldIsRejected" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="108" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorField" />
+    <testcase name="ErrorNamesTheFailingField" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="114" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorField" />
+  </testsuite>
+  <testsuite name="ValidatorStudent" tests="4" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.426">
+    <testcase name="AcceptsGoodRecord" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="121" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorStudent" />
+    <testcase name="ReportsFirstBadFieldInPromptOrder" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="125" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorStudent" />
+    <testcase name="RejectsCgpaOutOfRangeOrTooPrecise" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="134" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorStudent" />
+    <testcase name="RejectsNaNCgpa" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="149" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorStudent" />
+  </testsuite>
+  <testsuite name="ValidatorNormalize" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-11-04T09:23:58.426">
+    <testcase name="UppercasesRollNoAndTrimsText" file="C:/Users/bvaru/Downloads/SRMS-git/tests/validator_test.cpp" line="156" status="run" result="completed" time="0." timestamp="2026-11-04T09:23:58.426" classname="ValidatorNormalize" />
+  </testsuite>
+</testsuites>
