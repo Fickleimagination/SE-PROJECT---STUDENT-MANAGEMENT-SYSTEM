@@ -104,6 +104,10 @@ Status RecordService::addStudent(
 
         return Status::OK;
 
+} catch (...) {
+    return Status::INTERNAL_ERROR;
+}
+}
 Result<Student> RecordService::getStudent(const Session& session, const std::string& roll_no) {
     try {
         if (!isActiveAdmin(session, clock_())) return {Status::ACCESS_DENIED, Student{}, ""};
