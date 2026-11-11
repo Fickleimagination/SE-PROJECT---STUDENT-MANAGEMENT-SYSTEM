@@ -20,6 +20,7 @@ endif()
 add_library(srms_core
     src/core/validator.cpp
     src/core/record_service.cpp
+    src/core/record_controller.cpp
     src/core/report_service.cpp
     src/core/database.cpp
     src/core/student_dao.cpp
@@ -47,6 +48,7 @@ target_compile_options(srms_core PRIVATE
 add_executable(srms_tests
     tests/validator_test.cpp
     tests/record_service_test.cpp
+    tests/record_controller_test.cpp
     tests/report_service_test.cpp
     tests/auth_service_test.cpp
     tests/student_dao_test.cpp

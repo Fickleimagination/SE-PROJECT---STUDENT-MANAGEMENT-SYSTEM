@@ -1,4 +1,5 @@
 #include "console_ui.h"
+#include "record_controller.h"
 
 #include <iostream>
 
@@ -187,7 +188,11 @@ void ConsoleUI::adminMenu(Session& session) {
         session.last_activity = std::time(nullptr);
 
         if (choice == "1") {
-            output_ << "Student-record operations are not connected yet.\n";
+            if (records_) {
+                records_->run(session);
+            } else {
+                output_ << "Student-record operations are not connected yet.\n";
+            }
         } else if (choice == "2") {
             output_ << "Reporting operations are not connected yet.\n";
         } else if (choice == "3") {
