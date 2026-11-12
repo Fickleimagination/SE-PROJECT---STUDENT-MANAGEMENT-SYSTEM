@@ -25,6 +25,7 @@ add_library(srms_core
     src/core/student_dao.cpp
     src/core/search_service.cpp
     src/core/auth_service.cpp
+    src/core/admin_dao.cpp
     src/core/console_ui.cpp
 )
 
@@ -49,6 +50,7 @@ add_executable(srms_tests
     tests/record_service_test.cpp
     tests/report_service_test.cpp
     tests/auth_service_test.cpp
+    tests/admin_dao_test.cpp
     tests/student_dao_test.cpp
     tests/search_service_test.cpp
     tests/student_dao_search_test.cpp
