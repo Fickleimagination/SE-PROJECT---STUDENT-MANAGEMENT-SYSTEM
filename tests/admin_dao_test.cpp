@@ -2,6 +2,9 @@
 
 #include <gtest/gtest.h>
 #include <sqlite3.h>
+#include <chrono>
+#include <filesystem>
+#include <string>
 
 namespace srms {
 namespace {
@@ -10,9 +13,16 @@ class AdminDAOTest : public ::testing::Test {
 protected:
     Database db;
     AdminDAO* dao = nullptr;
+    std::string db_path;
 
     void SetUp() override {
-        ASSERT_TRUE(db.open(":memory:", "sql/schema.sql"));
+        const auto id =
+            std::chrono::steady_clock::now().time_since_epoch().count();
+
+        db_path = (std::filesystem::temp_directory_path() /
+            ("srms_admin_dao_" + std::to_string(id) + ".sqlite")).string();
+
+        ASSERT_TRUE(db.open(db_path, "sql/schema.sql"));
         dao = new AdminDAO(db);
 
         const char* sql =
@@ -27,6 +37,13 @@ protected:
 
     void TearDown() override {
         delete dao;
+        dao = nullptr;
+        db.close();
+
+        std::error_code error;
+        std::filesystem::remove(db_path, error);
+        std::filesystem::remove(db_path + "-wal", error);
+        std::filesystem::remove(db_path + "-shm", error);
     }
 };
 
