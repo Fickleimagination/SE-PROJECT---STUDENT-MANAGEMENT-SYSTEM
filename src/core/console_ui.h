@@ -7,6 +7,8 @@
 
 namespace srms {
 
+class RecordController;
+
 class ConsoleUI {
 public:
     ConsoleUI(
@@ -16,10 +18,14 @@ public:
 
     void run();
 
+    // Connects the Student records menu (US-03..US-06). Without it, option 1 says not connected.
+    void setRecordController(RecordController* records) { records_ = records; }
+
 private:
     AuthService& auth_;
     std::istream& input_;
     std::ostream& output_;
+    RecordController* records_ = nullptr;
 
     bool promptLine(
         const std::string& message,
