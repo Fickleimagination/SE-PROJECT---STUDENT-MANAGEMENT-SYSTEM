@@ -52,6 +52,15 @@ public:
         bool allow_name_search
     ) override;
 
+        Result<std::vector<Student>> sortRecords(
+        Field field,
+        Order order
+    ) override;
+
+    Result<std::vector<Student>> filterRecords(
+        const FilterCriteria& criteria
+    ) override;
+
 private:
     Database& database_;
 };
