@@ -81,6 +81,122 @@ std::string escapeLike(const std::string& value) {
     return escaped;
 }
 
+Result<std::vector<Student>> readStudentRows(
+    sqlite3_stmt* statement
+) {
+    std::vector<Student> students;
+    int rc = SQLITE_OK;
+
+    while ((rc = sqlite3_step(statement)) == SQLITE_ROW) {
+        students.push_back(readStudent(statement));
+    }
+
+    const int finalizeRc = sqlite3_finalize(statement);
+
+    if (rc != SQLITE_DONE || finalizeRc != SQLITE_OK) {
+        return {
+            Status::DB_ERROR,
+            {},
+            "database query failed"
+        };
+    }
+
+    return {Status::OK, std::move(students), ""};
+}
+
+int bindSearchParameters(
+    sqlite3_stmt* statement,
+    const std::string& term,
+    bool allowNameSearch
+) {
+    int rc = bindText(statement, 1, term);
+
+    if (rc == SQLITE_OK) {
+        rc = sqlite3_bind_int(
+            statement, 2, allowNameSearch ? 1 : 0
+        );
+    }
+
+    const std::string pattern = "%" + escapeLike(term) + "%";
+
+    if (rc == SQLITE_OK) {
+        rc = bindText(statement, 3, pattern);
+    }
+
+    return rc;
+}
+
+const char* sortColumn(Field field) {
+    switch (field) {
+        case Field::Department:
+            return "department COLLATE NOCASE";
+        case Field::Semester:
+            return "semester";
+        case Field::Cgpa:
+            return "cgpa";
+        default:
+            return nullptr;
+    }
+}
+
+const char* sortDirection(Order order) {
+    switch (order) {
+        case Order::Ascending:
+            return "ASC";
+        case Order::Descending:
+            return "DESC";
+        default:
+            return nullptr;
+    }
+}
+
+std::string buildFilterSql(const FilterCriteria& criteria) {
+    std::string sql =
+        "SELECT roll_no, name, department, semester, "
+        "contact, cgpa, created_at, updated_at "
+        "FROM students";
+
+    if (criteria.department) {
+        sql += " WHERE department = ?1 COLLATE NOCASE";
+    }
+
+    if (criteria.semester) {
+        sql += criteria.department
+            ? " AND semester = ?2"
+            : " WHERE semester = ?1";
+    }
+
+    sql += " ORDER BY roll_no COLLATE NOCASE ASC;";
+
+    return sql;
+}
+
+int bindFilterParameters(
+    sqlite3_stmt* statement,
+    const FilterCriteria& criteria
+) {
+    int parameterIndex = 1;
+    int rc = SQLITE_OK;
+
+    if (criteria.department) {
+        rc = bindText(
+            statement,
+            parameterIndex++,
+            *criteria.department
+        );
+    }
+
+    if (rc == SQLITE_OK && criteria.semester) {
+        rc = sqlite3_bind_int(
+            statement,
+            parameterIndex,
+            *criteria.semester
+        );
+    }
+
+    return rc;
+}
+
 }  // namespace
 
 Result<Student> StudentDAO::find(
@@ -524,6 +640,7 @@ Result<bool> StudentDAO::exists(
 }
 
 // US-08: Search by exact roll number, with optional partial-name search.
+
 Result<std::vector<Student>> StudentDAO::search(
     const std::string& term,
     bool allow_name_search
@@ -531,11 +648,7 @@ Result<std::vector<Student>> StudentDAO::search(
     sqlite3* db = database_.handle();
 
     if (db == nullptr) {
-        return {
-            Status::DB_ERROR,
-            {},
-            "database is not open"
-        };
+        return {Status::DB_ERROR, {}, "database is not open"};
     }
 
     const char* sql =
@@ -548,72 +661,25 @@ Result<std::vector<Student>> StudentDAO::search(
 
     sqlite3_stmt* statement = nullptr;
 
-    int rc = sqlite3_prepare_v2(
-        db, sql, -1, &statement, nullptr
-    );
+    const int prepareRc =
+        sqlite3_prepare_v2(db, sql, -1, &statement, nullptr);
 
-    if (rc != SQLITE_OK) {
+    if (prepareRc != SQLITE_OK) {
         sqlite3_finalize(statement);
-        return {
-            Status::DB_ERROR,
-            {},
-            "database query failed"
-        };
+        return {Status::DB_ERROR, {}, "database query failed"};
     }
 
-    // Always allow exact roll-number matching.
-    rc = bindText(statement, 1, term);
+    const int bindRc =
+        bindSearchParameters(statement, term, allow_name_search);
 
-    // Name matching is enabled only when authorized by the caller.
-    if (rc == SQLITE_OK) {
-        rc = sqlite3_bind_int(
-            statement,
-            2,
-            allow_name_search ? 1 : 0
-        );
-    }
-
-    // Escape user-supplied LIKE wildcards and search within names.
-    const std::string pattern =
-        "%" + escapeLike(term) + "%";
-
-    if (rc == SQLITE_OK) {
-        rc = bindText(statement, 3, pattern);
-    }
-
-    if (rc != SQLITE_OK) {
+    if (bindRc != SQLITE_OK) {
         sqlite3_finalize(statement);
-        return {
-            Status::DB_ERROR,
-            {},
-            "database query failed"
-        };
+        return {Status::DB_ERROR, {}, "database query failed"};
     }
 
-    std::vector<Student> students;
-
-    while ((rc = sqlite3_step(statement)) == SQLITE_ROW) {
-        students.push_back(readStudent(statement));
-    }
-
-    const int finalize_rc =
-        sqlite3_finalize(statement);
-
-    // Do not return partial results if the query failed.
-    if (rc != SQLITE_DONE || finalize_rc != SQLITE_OK) {
-        return {
-            Status::DB_ERROR,
-            {},
-            "database query failed"
-        };
-    }
-
-    return {
-        Status::OK,
-        std::move(students),
-        ""
-    };
+    return readStudentRows(statement);
 }
+
 
 Status StudentDAO::insert(const Student& student) {
     sqlite3* db = database_.handle();
@@ -787,5 +853,89 @@ Result<std::vector<Student>> StudentDAO::findByDeptSem(
         ""
     };
 }
+
+// US-10: Sort the complete student list.
+
+Result<std::vector<Student>> StudentDAO::sortRecords(
+    Field field,
+    Order order
+) {
+    sqlite3* db = database_.handle();
+
+    if (db == nullptr) {
+        return {Status::DB_ERROR, {}, "database is not open"};
+    }
+
+    const char* column = sortColumn(field);
+    const char* direction = sortDirection(order);
+
+    if (column == nullptr) {
+        return {Status::VALIDATION_ERROR, {}, "invalid sort field"};
+    }
+
+    if (direction == nullptr) {
+        return {Status::VALIDATION_ERROR, {}, "invalid sort order"};
+    }
+
+    const std::string sql =
+        "SELECT roll_no, name, department, semester, "
+        "contact, cgpa, created_at, updated_at "
+        "FROM students ORDER BY " +
+        std::string(column) + " " + direction +
+        ", roll_no COLLATE NOCASE ASC;";
+
+    sqlite3_stmt* statement = nullptr;
+
+    const int rc =
+        sqlite3_prepare_v2(db, sql.c_str(), -1, &statement, nullptr);
+
+    if (rc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        return {Status::DB_ERROR, {}, "database query failed"};
+    }
+
+    return readStudentRows(statement);
+}
+
+// US-11: Filter by department, semester, or both.
+
+Result<std::vector<Student>> StudentDAO::filterRecords(
+    const FilterCriteria& criteria
+) {
+    sqlite3* db = database_.handle();
+
+    if (db == nullptr) {
+        return {Status::DB_ERROR, {}, "database is not open"};
+    }
+
+    if (!criteria.department && !criteria.semester) {
+        return {
+            Status::VALIDATION_ERROR,
+            {},
+            "at least one filter criterion is required"
+        };
+    }
+
+    const std::string sql = buildFilterSql(criteria);
+    sqlite3_stmt* statement = nullptr;
+
+    const int prepareRc =
+        sqlite3_prepare_v2(db, sql.c_str(), -1, &statement, nullptr);
+
+    if (prepareRc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        return {Status::DB_ERROR, {}, "database query failed"};
+    }
+
+    const int bindRc = bindFilterParameters(statement, criteria);
+
+    if (bindRc != SQLITE_OK) {
+        sqlite3_finalize(statement);
+        return {Status::DB_ERROR, {}, "database query failed"};
+    }
+
+    return readStudentRows(statement);
+}
+
 
 }  // namespace srms

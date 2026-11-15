@@ -16,6 +16,21 @@ public:
         Status::OK, {}, ""
     };
 
+        Result<std::vector<Student>> sort_response{
+        Status::OK, {}, ""
+    };
+
+    Result<std::vector<Student>> filter_response{
+        Status::OK, {}, ""
+    };
+
+    bool sort_called = false;
+    bool filter_called = false;
+
+    Field received_field = Field::Department;
+    Order received_order = Order::Ascending;
+    FilterCriteria received_filter{};
+
     bool called = false;
     bool allow_name_search = false;
     std::string received_term;
@@ -29,6 +44,25 @@ public:
         allow_name_search = allow_names;
         return response;
     }
+
+    Result<std::vector<Student>> sortRecords(
+        Field field,
+        Order order
+    ) override {
+        sort_called = true;
+        received_field = field;
+        received_order = order;
+        return sort_response;
+    }
+
+    Result<std::vector<Student>> filterRecords(
+        const FilterCriteria& criteria
+    ) override {
+        filter_called = true;
+        received_filter = criteria;
+        return filter_response;
+    }
+
 };
 
 Student makeStudent() {
@@ -156,6 +190,161 @@ TEST(SearchServiceTest, PropagatesRepositoryDatabaseError) {
 
     EXPECT_EQ(result.status, Status::DB_ERROR);
     EXPECT_EQ(result.detail, "database query failed");
+}
+
+TEST(SearchServiceTest, AdministratorCanSortRecords) {
+    FakeSearchRepository repository;
+    repository.sort_response = {
+        Status::OK, {makeStudent()}, ""
+    };
+
+    const std::time_t now = 1000;
+    SearchService service(repository, [now]() { return now; });
+    const Session admin{"admin", true, now};
+
+    const auto result = service.sortRecords(
+        admin, Field::Cgpa, Order::Descending
+    );
+
+    ASSERT_EQ(result.status, Status::OK);
+    EXPECT_TRUE(repository.sort_called);
+    EXPECT_EQ(repository.received_field, Field::Cgpa);
+    EXPECT_EQ(repository.received_order, Order::Descending);
+    EXPECT_EQ(result.value.total_items, 1);
+}
+
+TEST(SearchServiceTest, RejectsInvalidSortSelection) {
+    FakeSearchRepository repository;
+
+    const std::time_t now = 1000;
+    SearchService service(repository, [now]() { return now; });
+    const Session admin{"admin", true, now};
+
+    EXPECT_EQ(
+        service.sortRecords(
+            admin, static_cast<Field>(999), Order::Ascending
+        ).status,
+        Status::VALIDATION_ERROR
+    );
+
+    EXPECT_EQ(
+        service.sortRecords(
+            admin, Field::Cgpa, static_cast<Order>(999)
+        ).status,
+        Status::VALIDATION_ERROR
+    );
+
+    EXPECT_FALSE(repository.sort_called);
+}
+
+TEST(SearchServiceTest, AdministratorCanFilterAndDepartmentIsNormalized) {
+    FakeSearchRepository repository;
+
+    const std::time_t now = 1000;
+    SearchService service(repository, [now]() { return now; });
+    const Session admin{"admin", true, now};
+
+    const FilterCriteria criteria{" cse ", 5};
+
+    const auto result = service.filterRecords(admin, criteria);
+
+    ASSERT_EQ(result.status, Status::OK);
+    ASSERT_TRUE(repository.filter_called);
+    ASSERT_TRUE(repository.received_filter.department.has_value());
+    ASSERT_TRUE(repository.received_filter.semester.has_value());
+
+    EXPECT_EQ(*repository.received_filter.department, "CSE");
+    EXPECT_EQ(*repository.received_filter.semester, 5);
+}
+
+TEST(SearchServiceTest, RejectsInvalidFilterCriteria) {
+    FakeSearchRepository repository;
+
+    const std::time_t now = 1000;
+    SearchService service(repository, [now]() { return now; });
+    const Session admin{"admin", true, now};
+
+    EXPECT_EQ(
+        service.filterRecords(admin, FilterCriteria{}).status,
+        Status::VALIDATION_ERROR
+    );
+
+    EXPECT_EQ(
+        service.filterRecords(
+            admin, FilterCriteria{"INVALID", std::nullopt}
+        ).status,
+        Status::VALIDATION_ERROR
+    );
+
+    EXPECT_EQ(
+        service.filterRecords(
+            admin, FilterCriteria{std::nullopt, 9}
+        ).status,
+        Status::VALIDATION_ERROR
+    );
+
+    EXPECT_FALSE(repository.filter_called);
+}
+
+TEST(SearchServiceTest, RejectsViewerExpiredAndFutureSessions) {
+    FakeSearchRepository repository;
+
+    const std::time_t now = 1000;
+    SearchService service(repository, [now]() { return now; });
+
+    const std::vector<Session> deniedSessions{
+        {"viewer", false, now},
+        {"admin", true, now - 601},
+        {"admin", true, now + 1},
+        {"", true, now}
+    };
+
+    for (const Session& session : deniedSessions) {
+        EXPECT_EQ(
+            service.sortRecords(
+                session, Field::Department, Order::Ascending
+            ).status,
+            Status::ACCESS_DENIED
+        );
+
+        EXPECT_EQ(
+            service.filterRecords(
+                session, FilterCriteria{"CSE", std::nullopt}
+            ).status,
+            Status::ACCESS_DENIED
+        );
+    }
+
+    EXPECT_FALSE(repository.sort_called);
+    EXPECT_FALSE(repository.filter_called);
+}
+
+TEST(SearchServiceTest, PropagatesSortingAndFilteringDatabaseErrors) {
+    FakeSearchRepository repository;
+    repository.sort_response = {
+        Status::DB_ERROR, {}, "database query failed"
+    };
+    repository.filter_response = {
+        Status::DB_ERROR, {}, "database query failed"
+    };
+
+    const std::time_t now = 1000;
+    SearchService service(repository, [now]() { return now; });
+    const Session admin{"admin", true, now};
+
+    EXPECT_EQ(
+        service.sortRecords(
+            admin, Field::Semester, Order::Ascending
+        ).status,
+        Status::DB_ERROR
+    );
+
+    EXPECT_EQ(
+        service.filterRecords(
+            admin, FilterCriteria{"CSE", 5}
+        ).status,
+        Status::DB_ERROR
+    );
 }
 
 }  // namespace

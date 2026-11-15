@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "types.h"
@@ -19,6 +20,15 @@ public:
         const std::string& term,
         bool allow_name_search
     ) = 0;
+
+    virtual Result<std::vector<Student>> sortRecords(
+        Field field,
+        Order order
+    ) = 0;
+
+    virtual Result<std::vector<Student>> filterRecords(
+        const FilterCriteria& criteria
+    ) = 0;
 };
 
 using SearchClock = std::function<std::time_t()>;
@@ -33,6 +43,17 @@ public:
     Result<Page<Student>> search(
         const std::optional<Session>& session,
         const std::string& term
+    );
+
+    Result<Page<Student>> sortRecords(
+        const Session& session,
+        Field field,
+        Order order
+    );
+
+    Result<Page<Student>> filterRecords(
+        const Session& session,
+        const FilterCriteria& criteria
     );
 
 private:
