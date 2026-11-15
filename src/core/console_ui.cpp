@@ -194,7 +194,11 @@ void ConsoleUI::adminMenu(Session& session) {
                 output_ << "Student-record operations are not connected yet.\n";
             }
         } else if (choice == "2") {
-            output_ << "Reporting operations are not connected yet.\n";
+            if (reports_) {
+                reports_(session);
+            } else {
+                output_ << "Reporting operations are not connected yet.\n";
+            }
         } else if (choice == "3") {
             auth_.logout(session);
             output_ << "Logged out successfully.\n";

@@ -76,3 +76,6 @@ gtest_discover_tests(
     srms_tests
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
 )
+
+add_executable(srms_app src/main.cpp)
+target_link_libraries(srms_app PRIVATE srms_core)
