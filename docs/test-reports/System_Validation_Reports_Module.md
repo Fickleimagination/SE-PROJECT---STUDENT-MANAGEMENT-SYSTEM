@@ -23,7 +23,7 @@
 
 ## Open items (not yet recorded)
 
-- **TC-RPT-02 timing:** the test requires the report within 2 seconds (NFR-PERF-02). The report appeared instantly on screen, but this has not been measured with a timer. Record a measured time.
+- **TC-RPT-02 timing:** the test requires the report within 2 seconds (NFR-PERF-02). Measured by hand with a phone stopwatch: 1 s from pressing Enter on the semester to the table appearing. PASS.
 - **TC-RPT-03 file comparison:** step 4 (open the exported CSV and compare it to the screen) has not been done yet.
 - **TC-RPT-03 ties:** the test expects every tied topper to be listed. The test data has no ties, so this case is not covered yet.
 
