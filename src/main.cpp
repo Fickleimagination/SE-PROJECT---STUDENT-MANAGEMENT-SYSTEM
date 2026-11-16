@@ -39,6 +39,30 @@ void writeAudit(srms::Database& database, const std::string& event, const std::s
     sqlite3_finalize(stmt);
 }
 
+// Writes one audit_log row for a record change (SEC-04): who did it and to which roll_no.
+void writeRecordAudit(srms::Database& database, const std::string& event,
+                      const std::string& username, const std::string& rollNo,
+                      const std::string& outcome) {
+    std::time_t now = std::time(nullptr);
+    char stamp[32];
+    std::strftime(stamp, sizeof(stamp), "%Y-%m-%d %H:%M:%S", std::localtime(&now));
+
+    sqlite3_stmt* stmt = nullptr;
+    const char* sql =
+        "INSERT INTO audit_log (timestamp, username, event_type, target_roll_no, outcome) "
+        "VALUES (?, ?, ?, ?, ?);";
+    if (sqlite3_prepare_v2(database.handle(), sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        return;
+    }
+    sqlite3_bind_text(stmt, 1, stamp, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, username.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 3, event.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 4, rollNo.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 5, outcome.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+}
+
 std::string ask(const std::string& prompt) {
     std::cout << prompt;
     std::string line;
@@ -136,7 +160,12 @@ int main() {
     srms::StudentDAO studentDao(database);
 
     srms::AuthService auth(adminDao);
-    srms::RecordService records(studentDao);
+    srms::RecordService records(
+        studentDao,
+        [&database](const std::string& event, const std::string& username,
+                    const std::string& rollNo, const std::string& outcome) {
+            writeRecordAudit(database, event, username, rollNo, outcome);
+        });
     srms::RecordController recordController(records, std::cin, std::cout);
 
     srms::ReportService reports(studentDao,
