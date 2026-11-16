@@ -51,6 +51,7 @@ add_executable(srms_tests
     tests/record_service_test.cpp
     tests/record_controller_test.cpp
     tests/report_service_test.cpp
+    tests/report_ties_test.cpp
     tests/auth_service_test.cpp
     tests/admin_dao_test.cpp
     tests/student_dao_test.cpp
