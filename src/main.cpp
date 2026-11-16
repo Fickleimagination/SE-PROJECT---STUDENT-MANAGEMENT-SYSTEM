@@ -1,5 +1,6 @@
 // Entry point: wires the services into the console menu.
 #include <ctime>
+#include <sqlite3.h>
 #include <iostream>
 #include <string>
 
@@ -13,6 +14,30 @@
 #include "student_dao.h"
 
 namespace {
+
+// Username of the admin who is exporting right now (used by the audit log).
+std::string g_currentUser;
+
+// Writes one row to audit_log (SEC-04). Uses parameterised SQL (SEC-02).
+void writeAudit(srms::Database& database, const std::string& event, const std::string& outcome) {
+    std::time_t now = std::time(nullptr);
+    char stamp[32];
+    std::strftime(stamp, sizeof(stamp), "%Y-%m-%d %H:%M:%S", std::localtime(&now));
+
+    sqlite3_stmt* stmt = nullptr;
+    const char* sql =
+        "INSERT INTO audit_log (timestamp, username, event_type, target_roll_no, outcome) "
+        "VALUES (?, ?, ?, NULL, ?);";
+    if (sqlite3_prepare_v2(database.handle(), sql, -1, &stmt, nullptr) != SQLITE_OK) {
+        return;
+    }
+    sqlite3_bind_text(stmt, 1, stamp, -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 2, g_currentUser.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 3, event.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(stmt, 4, outcome.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+}
 
 std::string ask(const std::string& prompt) {
     std::cout << prompt;
@@ -69,6 +94,10 @@ void runReports(srms::Session& session, srms::ReportService& reports) {
     }
 
     const srms::Report& report = result.value;
+    if (report.rows.empty() && report.student_count == 0) {
+        std::cout << "No records available for this report.\n";
+        return;
+    }
     if (type == srms::ReportType::AverageCgpa) {
         std::cout << "Students: " << report.student_count << '\n'
                   << "Average CGPA: " << report.average << '\n';
@@ -81,6 +110,7 @@ void runReports(srms::Session& session, srms::ReportService& reports) {
 
     const std::string format = ask("Export to file? Type txt, csv or no: ");
     if (format == "txt" || format == "csv") {
+        g_currentUser = session.username;
         auto path = reports.exportToFile(
             session, report,
             format == "txt" ? srms::Format::TXT : srms::Format::CSV,
@@ -109,10 +139,10 @@ int main() {
     srms::RecordService records(studentDao);
     srms::RecordController recordController(records, std::cin, std::cout);
 
-    // The audit hook must not be empty, or export would crash. No audit_log writer exists yet,
-    // so this hook does nothing for now.
     srms::ReportService reports(studentDao,
-        [](const std::string&, const std::string&) {});
+        [&database](const std::string& event, const std::string& outcome) {
+            writeAudit(database, event, outcome);
+        });
 
     srms::ConsoleUI ui(auth, std::cin, std::cout);
     ui.setRecordController(&recordController);
