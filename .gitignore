@@ -16,3 +16,5 @@ build/
 # Local editor settings
 /.vscode/
 /build-ci/
+build-cov/
+reports/
