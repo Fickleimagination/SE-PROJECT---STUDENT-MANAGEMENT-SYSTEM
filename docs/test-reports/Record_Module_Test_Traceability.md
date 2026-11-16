@@ -31,3 +31,15 @@ The "Automated equivalent" lines for TC-03 and TC-04 name tests that do not exis
 - **Running the real program** (the step-by-step system tests in Section 13.6, the 1 s commit time in TC-PERF-03, the 80-column check in UI-04). The program has no `main()` yet, so these were not executed.
 - **Audit rows in the database** (SEC-04). The record service calls its audit callback and a test checks it, but nothing writes to the `audit_log` table yet.
 - **Windows/MinGW** (NFR-PORT-01). Tests run on macOS and Ubuntu only.
+
+## Reports module (Sprint 2 update)
+
+Owner: Arabhi Bhat. Maps Test Plan v1.1, Section 13.6.5 (TC-RPT-01..03) to the GoogleTest cases in `tests/report_service_test.cpp`. Run with `ctest --test-dir build`.
+
+| Test Plan case | Requirements | Automated tests |
+|---|---|---|
+| TC-RPT-01 Empty selection shows message, no file | See Test Plan 13.6.5 | `ReportServiceTest.EmptySelectionShowsMessage`, `ReportServiceTest.EmptyReportCreatesNoFile` |
+| TC-RPT-02 Report responds within 2 s | See Test Plan 13.6.5 | Not automated. Timed by hand, recorded in `docs/test-reports/System_Validation_Reports_Module.md` |
+| TC-RPT-03 Export CSV/TXT and write audit row | See Test Plan 13.6.5 | `ReportServiceTest.ExportWritesCsvAndAudits`, `ReportServiceTest.ExportWritesTabSeparatedTxt`, `ReportServiceTest.CsvQuotesFieldsWithCommas` |
+
+Not yet covered: the audit row in the real `srms.db` file (checked by hand in the System Validation Report, not by a unit test).
