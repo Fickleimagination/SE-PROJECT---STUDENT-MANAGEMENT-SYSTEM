@@ -1,6 +1,8 @@
 #pragma once
 
+#include <functional>
 #include <iosfwd>
+#include <utility>
 #include <string>
 
 #include "auth_service.h"
@@ -21,11 +23,15 @@ public:
     // Connects the Student records menu (US-03..US-06). Without it, option 1 says not connected.
     void setRecordController(RecordController* records) { records_ = records; }
 
+    using ReportsMenu = std::function<void(Session&)>;
+    void setReportsMenu(ReportsMenu menu) { reports_ = std::move(menu); }
+
 private:
     AuthService& auth_;
     std::istream& input_;
     std::ostream& output_;
     RecordController* records_ = nullptr;
+    ReportsMenu reports_;
 
     bool promptLine(
         const std::string& message,
